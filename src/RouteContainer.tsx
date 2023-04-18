@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
 import Transactions from "./Transactions";
 import UserProfile from "./UserProfile";
 import Send from "./Send";
@@ -10,6 +11,7 @@ type RouteType = {
 };
 
 const routesList: RouteType[] = [
+  { path: "/demo-react-app", element: <Home /> },
   { path: "/transactions", element: <Transactions /> },
   { path: "/user_profile", element: <UserProfile /> },
   { path: "/send", element: <Send /> },

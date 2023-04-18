@@ -1,22 +1,32 @@
 import React from "react";
-import logo from "./logo.svg";
+import styled from '@emotion/styled'
 import Navigation from "./Navigation";
 import RouteContainer from "./RouteContainer";
-import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <AppDiv>
       <Navigation />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      <AppBody>
       <RouteContainer/>
-      </header>
-    </div>
+      </AppBody>
+    </AppDiv>
   );
 }
+
+const AppDiv = styled.div`
+  display: flex;
+`
+
+const AppBody = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+`
+
 
 export default App;
