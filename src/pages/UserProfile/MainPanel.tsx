@@ -37,21 +37,13 @@ const MainPanel = ({
 };
 
 const StatusTag = ({ status }: { status: string }) => {
-  let tagColor;
-
-  switch (status) {
-    case "verified":
-      tagColor = "green";
-      break;
-    case "rejected":
-      tagColor = "red";
-      break;
-    default:
-      tagColor = "";
-  }
+  const colourMapping: Record<string, string> = {
+    verified: "green",
+    rejected: "red",
+  };
 
   return (
-    <Tag color={tagColor} style={{ textTransform: "capitalize" }}>
+    <Tag color={colourMapping[status]} style={{ textTransform: "capitalize" }}>
       {status}
     </Tag>
   );
