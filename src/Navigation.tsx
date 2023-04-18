@@ -24,7 +24,7 @@ const Navigation = () => {
 };
 
 const Wrapper = styled.div`
-  width: 250px;
+  min-width: 250px;
 `;
 
 export default Navigation;

@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Transactions from "./Transactions";
-import UserProfile from "./UserProfile";
-import Send from "./Send";
+import Home from "./pages/Home";
+import Transactions from "./pages/Transactions";
+import UserProfile from "./pages/UserProfile";
+import Send from "./pages/Send";
 
 type RouteType = {
   path: string;
