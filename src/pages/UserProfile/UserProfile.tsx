@@ -1,28 +1,21 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import ProfilePanel from "./ProfilePanel";
 import MainPanel from "./MainPanel";
 
-const userData = {
-  fullName: "Test User One",
-  email: "test_user@gmail.com",
-  phoneNo: "811911112",
-  profileImgUrl: "https://picsum.photos/id/203/300",
-  bankAccounts: [
-    {
-      accountNo: "0122368991",
-      bankAbbrev: "DBS",
-      verificationStatus: "verified",
-    },
-    {
-      accountNo: "0744368552",
-      bankAbbrev: "UOB",
-      verificationStatus: "pending",
-    },
-  ],
-};
+import { fetchUserData } from "./actions";
+import { RootState } from "../../store";
 
 const UserProfile = () => {
-  const { fullName, email, phoneNo, profileImgUrl, bankAccounts } = userData;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, []);
+
+  const { fullName, email, phoneNo, profileImgUrl, bankAccounts } = useSelector(
+    (state: RootState) => state.userProfile
+  );
 
   return (
     <>
