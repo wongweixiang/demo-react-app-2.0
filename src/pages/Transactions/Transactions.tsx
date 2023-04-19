@@ -1,64 +1,11 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
-import { Table, Tag } from "antd";
+import { Table, Tag, Select } from "antd";
 import dayjs from "dayjs";
 
-const dataSource = [
-  {
-    id: "x202399",
-    createdAt: "2022-11-09T17:19:18.000Z",
-    type: "Bank Transfer Out",
-    amount: {
-      direction: "-",
-      currency: "USD",
-      netAmount: "$100.00",
-    },
-    status: "pending",
-  },
-  {
-    id: "x202398",
-    createdAt: "2022-11-05T15:19:18.000Z",
-    type: "Payment Received",
-    amount: {
-      direction: "+",
-      currency: "SGD",
-      netAmount: "$250.00",
-    },
-    status: "completed",
-  },
-  {
-    id: "x202396",
-    createdAt: "2022-10-28T23:20:18.000Z",
-    type: "Payment Received",
-    amount: {
-      direction: "+",
-      currency: "USD",
-      netAmount: "$150.00",
-    },
-    status: "completed",
-  },
-  {
-    id: "x202391",
-    createdAt: "2022-10-21T10:12:18.000Z",
-    type: "Payment Sent",
-    amount: {
-      direction: "-",
-      currency: "SGD",
-      netAmount: "$592.45",
-    },
-    status: "cancelled",
-  },
-  {
-    id: "x202387",
-    createdAt: "2022-10-20T18:45:18.000Z",
-    type: "Bank Transfer In",
-    amount: {
-      direction: "+",
-      currency: "SGD",
-      netAmount: "$183.90",
-    },
-    status: "completed",
-  },
-];
+import { fetchTransactions } from "./actions";
+import { RootState } from "../../store";
 
 const columns = [
   {
@@ -93,13 +40,42 @@ const columns = [
 ];
 
 const Transactions = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, []);
+
+  const { transactions } = useSelector(
+    (state: RootState) => state.transactions
+  );
+
   return (
     <>
       <h3>Transactions</h3>
       <Panel>
+        <Filters>
+          <Select
+            placeholder="Select a status"
+            style={{ width: "200px" }}
+            options={statuses.map((s) => {
+              return {
+                value: s,
+                label: s.charAt(0).toUpperCase() + s.slice(1),
+              };
+            })}
+          />
+          <Select
+            placeholder="Select a transaction type"
+            style={{ width: "250px" }}
+            options={transactionTypes.map((t) => {
+              return { value: t, label: t };
+            })}
+          />
+        </Filters>
         <Table
           columns={columns}
-          dataSource={dataSource}
+          dataSource={transactions}
           pagination={{ pageSize: 5 }}
         />
       </Panel>
@@ -122,6 +98,25 @@ const StatusTag = ({ status }: { status: string }) => {
 };
 
 export default Transactions;
+
+const statuses = ["completed", "cancelled", "pending", "expired"];
+
+const transactionTypes = [
+  "Bank Transfer In",
+  "Bank Transfer Out",
+  "Payment Sent",
+  "Payment Received",
+];
+
+const Filters = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+`;
 
 const Panel = styled.div`
   display: flex;
