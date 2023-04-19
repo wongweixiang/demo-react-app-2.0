@@ -22,6 +22,7 @@ const Home = () => {
   return (
     <>
       <h1>Hello, {username}!</h1>
+
       <h3>My Wallets</h3>
       <CardContainer>
         {accountsData.map((a: Account) => (
@@ -34,7 +35,10 @@ const Home = () => {
               </Title>
             }
           >
-            {a.balance}
+            <CardBody>
+              <b>Balance:</b>
+              <span>{a.balance}</span>
+            </CardBody>
           </WalletCard>
         ))}
       </CardContainer>
@@ -51,6 +55,11 @@ const CardContainer = styled.div`
 
 const WalletCard = styled(Card)`
   flex-grow: 1;
+`;
+
+const CardBody = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.div`
