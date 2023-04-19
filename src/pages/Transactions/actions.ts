@@ -7,7 +7,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer Out",
       amount: {
         direction: "-",
-        currency: "USD",
+        currency: "usd",
         netAmount: "$100.00",
       },
       status: "pending",
@@ -18,7 +18,7 @@ export const fetchTransactions = () => ({
       type: "Payment Received",
       amount: {
         direction: "+",
-        currency: "SGD",
+        currency: "sgd",
         netAmount: "$250.00",
       },
       status: "completed",
@@ -29,7 +29,7 @@ export const fetchTransactions = () => ({
       type: "Payment Received",
       amount: {
         direction: "+",
-        currency: "USD",
+        currency: "usd",
         netAmount: "$150.00",
       },
       status: "completed",
@@ -40,7 +40,7 @@ export const fetchTransactions = () => ({
       type: "Payment Sent",
       amount: {
         direction: "-",
-        currency: "SGD",
+        currency: "sgd",
         netAmount: "$592.45",
       },
       status: "cancelled",
@@ -51,7 +51,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer In",
       amount: {
         direction: "+",
-        currency: "SGD",
+        currency: "sgd",
         netAmount: "$183.90",
       },
       status: "completed",
@@ -62,7 +62,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer In",
       amount: {
         direction: "+",
-        currency: "SGD",
+        currency: "sgd",
         netAmount: "$99.90",
       },
       status: "cancelled",
@@ -73,7 +73,7 @@ export const fetchTransactions = () => ({
       type: "Payment Received",
       amount: {
         direction: "+",
-        currency: "USD",
+        currency: "usd",
         netAmount: "$420.55",
       },
       status: "completed",
@@ -84,7 +84,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer Out",
       amount: {
         direction: "-",
-        currency: "SGD",
+        currency: "sgd",
         netAmount: "$123.00",
       },
       status: "completed",
@@ -95,7 +95,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer In",
       amount: {
         direction: "+",
-        currency: "USD",
+        currency: "usd",
         netAmount: "$15.00",
       },
       status: "expired",
@@ -106,7 +106,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer In",
       amount: {
         direction: "+",
-        currency: "USD",
+        currency: "usd",
         netAmount: "$55.00",
       },
       status: "expired",
@@ -117,7 +117,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer In",
       amount: {
         direction: "+",
-        currency: "SGD",
+        currency: "sgd",
         netAmount: "$997.00",
       },
       status: "completed",
@@ -128,7 +128,7 @@ export const fetchTransactions = () => ({
       type: "Bank Transfer In",
       amount: {
         direction: "+",
-        currency: "USD",
+        currency: "usd",
         netAmount: "$880.00",
       },
       status: "completed",

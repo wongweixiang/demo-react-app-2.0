@@ -27,7 +27,7 @@ const columns = [
     dataIndex: "amount",
     title: "Amount",
     render: (a: Record<string, string>) => {
-      return <>{`${a.direction} ${a.currency}${a.netAmount}`}</>;
+      return <>{`${a.direction} ${a.currency.toUpperCase()}${a.netAmount}`}</>;
     },
   },
   {

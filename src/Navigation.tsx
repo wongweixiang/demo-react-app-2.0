@@ -75,6 +75,7 @@ const Logo = styled.div`
   text-align: center;
   color: #1aa3ff;
   background-color: #001529;
+  user-select: none;
 `;
 
 export default Navigation;

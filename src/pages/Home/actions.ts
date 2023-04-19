@@ -4,13 +4,13 @@ export const fetchAccountsData = () => ({
     {
       accountId: 1,
       currency: "sgd",
-      balance: "$830.00",
+      balance: "830.00",
       type: "PersonalAccount",
     },
     {
       accountId: 2,
       currency: "usd",
-      balance: "$750.00",
+      balance: "750.00",
       type: "PersonalAccount",
     },
   ],

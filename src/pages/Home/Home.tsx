@@ -37,7 +37,7 @@ const Home = () => {
           >
             <CardBody>
               <b>Balance:</b>
-              <span>{a.balance}</span>
+              <b style={{ fontSize: "32px" }}>${a.balance}</b>
             </CardBody>
           </WalletCard>
         ))}
@@ -64,6 +64,8 @@ const CardBody = styled.div`
 
 const Title = styled.div`
   display: flex;
+  font-size: 18px;
+  font-weight: 700;
   text-transform: uppercase;
   gap: 0.5rem;
 `;
