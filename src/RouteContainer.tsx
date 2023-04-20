@@ -11,10 +11,10 @@ type RouteType = {
 };
 
 const routesList: RouteType[] = [
-  { path: "/demo-react-app", element: <Home /> },
-  { path: "/transactions", element: <Transactions /> },
-  { path: "/user_profile", element: <UserProfile /> },
-  { path: "/send", element: <Send /> },
+  { path: "/quickpay/", element: <Home /> },
+  { path: "/quickpay/transactions", element: <Transactions /> },
+  { path: "/quickpay/user_profile", element: <UserProfile /> },
+  { path: "/quickpay/send", element: <Send /> },
 ];
 
 const RouteContainer = () => {

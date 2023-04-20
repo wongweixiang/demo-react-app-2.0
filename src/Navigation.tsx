@@ -14,7 +14,7 @@ const items = [
     label: (
       <Space>
         <HomeOutlined />
-        <Link to="/demo-react-app">Home</Link>
+        <Link to="/quickpay/">Home</Link>
       </Space>
     ),
   },
@@ -23,7 +23,7 @@ const items = [
     label: (
       <Space>
         <SendOutlined />
-        <Link to="/send">Send</Link>
+        <Link to="/quickpay/send">Send</Link>
       </Space>
     ),
   },
@@ -32,7 +32,7 @@ const items = [
     label: (
       <Space>
         <InteractionOutlined />
-        <Link to="/transactions">Transactions</Link>
+        <Link to="/quickpay/transactions">Transactions</Link>
       </Space>
     ),
   },
@@ -41,7 +41,7 @@ const items = [
     label: (
       <Space>
         <UserOutlined />
-        <Link to="/user_profile">User Profile</Link>
+        <Link to="/quickpay/user_profile">User Profile</Link>
       </Space>
     ),
   },
