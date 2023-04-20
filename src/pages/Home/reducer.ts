@@ -1,13 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import usersAPI from "../../api/users.api";
 
-export const fetchUsersTest = createAsyncThunk<any>(
-  "home/fetchUsers",
-  async () => {
-    const { data } = await usersAPI.getUsers();
-    return data;
-  }
-);
+export const fetchUsersTest = createAsyncThunk("home/fetchUsers", async () => {
+  const { data } = await usersAPI.getUsers();
+  return data;
+});
 
 const homeSlice = createSlice({
   name: "home",
