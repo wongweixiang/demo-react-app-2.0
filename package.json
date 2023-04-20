@@ -53,6 +53,10 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "msw": "^1.2.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
