@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 import { Table, Tag, Select, Input } from "antd";
 import dayjs from "dayjs";
 
-import { fetchTransactions } from "./actions";
-import { RootState } from "../../store";
+import { fetchTransactions } from "./reducer";
+import { AppDispatch, RootState } from "../../store";
 
 const columns = [
   {
@@ -42,7 +42,7 @@ const columns = [
 const { Search } = Input;
 
 const Transactions = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const [transactionID, setTransactionID] = useState("");
   const [status, setStatus] = useState([]);
@@ -80,6 +80,7 @@ const Transactions = () => {
           />
           <Select
             placeholder="Select a transaction type"
+            mode="multiple"
             style={{ width: "250px" }}
             onChange={(e) => setTransactionType(e)}
             options={transactionTypes.map((t) => {

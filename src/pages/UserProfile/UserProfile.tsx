@@ -4,13 +4,13 @@ import styled from "@emotion/styled";
 import ProfilePanel from "./ProfilePanel";
 import MainPanel from "./MainPanel";
 
-import { fetchUserData } from "./actions";
-import { RootState } from "../../store";
+import { fetchUserProfile } from "./reducer";
+import { AppDispatch, RootState } from "../../store";
 
 const UserProfile = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchUserData());
+    dispatch(fetchUserProfile());
   }, []);
 
   const { fullName, email, phoneNo, profileImgUrl, bankAccounts } = useSelector(
