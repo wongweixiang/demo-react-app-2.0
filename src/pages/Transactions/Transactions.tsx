@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
-import { Table, Tag, Select } from "antd";
+import { Table, Tag, Select, Input } from "antd";
 import dayjs from "dayjs";
 
 import { fetchTransactions } from "./actions";
@@ -39,12 +39,18 @@ const columns = [
   },
 ];
 
+const { Search } = Input;
+
 const Transactions = () => {
   const dispatch = useDispatch();
 
+  const [transactionID, setTransactionID] = useState("");
+  const [status, setStatus] = useState([]);
+  const [transactionType, setTransactionType] = useState([]);
+
   useEffect(() => {
-    dispatch(fetchTransactions());
-  }, []);
+    dispatch(fetchTransactions({ transactionID, status, transactionType }));
+  }, [transactionID, status, transactionType]);
 
   const { transactions } = useSelector(
     (state: RootState) => state.transactions
@@ -55,9 +61,16 @@ const Transactions = () => {
       <h3>Transactions</h3>
       <Panel>
         <Filters>
+          <Search
+            placeholder="Search by transaction ID"
+            style={{ width: "230px" }}
+            onSearch={(e) => setTransactionID(e)}
+          />
           <Select
             placeholder="Select a status"
             style={{ width: "200px" }}
+            mode="multiple"
+            onChange={(e) => setStatus(e)}
             options={statuses.map((s) => {
               return {
                 value: s,
@@ -68,6 +81,7 @@ const Transactions = () => {
           <Select
             placeholder="Select a transaction type"
             style={{ width: "250px" }}
+            onChange={(e) => setTransactionType(e)}
             options={transactionTypes.map((t) => {
               return { value: t, label: t };
             })}
