@@ -4,20 +4,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { DollarTwoTone } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
-import { fetchAccountsData } from "./actions";
+import { fetchAccountsData, fetchUsersTest } from "./reducer";
 import { Account } from "./types";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 
 const username = "Test User One";
 
 const Home = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAccountsData());
+    dispatch(
+      fetchAccountsData([
+        {
+          accountId: 1,
+          currency: "sgd",
+          balance: "830.00",
+          type: "PersonalAccount",
+        },
+        {
+          accountId: 2,
+          currency: "usd",
+          balance: "750.00",
+          type: "PersonalAccount",
+        },
+      ])
+    );
+    dispatch(fetchUsersTest());
   }, []);
 
-  const { accountsData } = useSelector((state: RootState) => state.home);
+  const { accountsData, users } = useSelector((state: RootState) => state.home);
+
+  console.log(users);
 
   return (
     <>
