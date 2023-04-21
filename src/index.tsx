@@ -8,18 +8,16 @@ import store from "./store";
 import reportWebVitals from "./reportWebVitals";
 
 async function main() {
-  if (process.env.NODE_ENV === "development") {
-    if (window.location.pathname === "/quickpay") {
-      window.location.pathname = "/quickpay/";
-    }
-
-    const { worker } = require("./mocks/browser");
-    await worker.start({
-      serviceWorker: {
-        url: "/quickpay/mockServiceWorker.js",
-      },
-    });
+  if (window.location.pathname === "/quickpay") {
+    window.location.pathname = "/quickpay/";
   }
+
+  const { worker } = require("./mocks/browser");
+  await worker.start({
+    serviceWorker: {
+      url: "/quickpay/mockServiceWorker.js",
+    },
+  });
 
   const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
