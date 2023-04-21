@@ -5,16 +5,18 @@ import Transactions from "./pages/Transactions";
 import UserProfile from "./pages/UserProfile";
 import Send from "./pages/Send";
 
+import { PATHS } from "./constants";
+
 type RouteType = {
   path: string;
   element: React.ReactNode;
 };
 
 const routesList: RouteType[] = [
-  { path: "/demo-react-app/", element: <Home /> },
-  { path: "/demo-react-app/transactions", element: <Transactions /> },
-  { path: "/demo-react-app/user_profile", element: <UserProfile /> },
-  { path: "/demo-react-app/send", element: <Send /> },
+  { path: PATHS.HOME, element: <Home /> },
+  { path: PATHS.TRANSACTIONS, element: <Transactions /> },
+  { path: PATHS.USER_PROFILE, element: <UserProfile /> },
+  { path: PATHS.SEND, element: <Send /> },
 ];
 
 const RouteContainer = () => {

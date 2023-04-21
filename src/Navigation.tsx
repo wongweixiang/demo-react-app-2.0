@@ -7,6 +7,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Space } from "antd";
+import { PATHS } from "./constants";
 
 const items = [
   {
@@ -14,7 +15,7 @@ const items = [
     label: (
       <Space>
         <HomeOutlined />
-        <Link to="/demo-react-app/">Home</Link>
+        <Link to={PATHS.HOME}>Home</Link>
       </Space>
     ),
   },
@@ -23,7 +24,7 @@ const items = [
     label: (
       <Space>
         <SendOutlined />
-        <Link to="/demo-react-app/send">Send</Link>
+        <Link to={PATHS.SEND}>Send</Link>
       </Space>
     ),
   },
@@ -32,7 +33,7 @@ const items = [
     label: (
       <Space>
         <InteractionOutlined />
-        <Link to="/demo-react-app/transactions">Transactions</Link>
+        <Link to={PATHS.TRANSACTIONS}>Transactions</Link>
       </Space>
     ),
   },
@@ -41,7 +42,7 @@ const items = [
     label: (
       <Space>
         <UserOutlined />
-        <Link to="/demo-react-app/user_profile">User Profile</Link>
+        <Link to={PATHS.USER_PROFILE}>User Profile</Link>
       </Space>
     ),
   },
@@ -50,7 +51,7 @@ const items = [
 const Navigation = () => {
   return (
     <Wrapper>
-      <Logo>demo-react-app</Logo>
+      <Logo>QuickPay</Logo>
       <Menu
         style={{ width: "100%", height: "100%" }}
         theme="dark"
