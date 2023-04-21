@@ -14,7 +14,7 @@ const items = [
     label: (
       <Space>
         <HomeOutlined />
-        <Link to="/quickpay/">Home</Link>
+        <Link to="/demo-react-app/">Home</Link>
       </Space>
     ),
   },
@@ -23,7 +23,7 @@ const items = [
     label: (
       <Space>
         <SendOutlined />
-        <Link to="/quickpay/send">Send</Link>
+        <Link to="/demo-react-app/send">Send</Link>
       </Space>
     ),
   },
@@ -32,7 +32,7 @@ const items = [
     label: (
       <Space>
         <InteractionOutlined />
-        <Link to="/quickpay/transactions">Transactions</Link>
+        <Link to="/demo-react-app/transactions">Transactions</Link>
       </Space>
     ),
   },
@@ -41,7 +41,7 @@ const items = [
     label: (
       <Space>
         <UserOutlined />
-        <Link to="/quickpay/user_profile">User Profile</Link>
+        <Link to="/demo-react-app/user_profile">User Profile</Link>
       </Space>
     ),
   },
@@ -50,7 +50,7 @@ const items = [
 const Navigation = () => {
   return (
     <Wrapper>
-      <Logo>QuickPay</Logo>
+      <Logo>demo-react-app</Logo>
       <Menu
         style={{ width: "100%", height: "100%" }}
         theme="dark"

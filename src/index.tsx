@@ -8,14 +8,14 @@ import store from "./store";
 import reportWebVitals from "./reportWebVitals";
 
 async function main() {
-  if (window.location.pathname === "/quickpay") {
-    window.location.pathname = "/quickpay/";
+  if (window.location.pathname === "/demo-react-app") {
+    window.location.pathname = "/demo-react-app/";
   }
 
   const { worker } = require("./mocks/browser");
   await worker.start({
     serviceWorker: {
-      url: "/quickpay/mockServiceWorker.js",
+      url: "/demo-react-app/mockServiceWorker.js",
     },
   });
 
