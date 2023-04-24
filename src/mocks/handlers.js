@@ -5,30 +5,6 @@ export const handlers = [
     return res(ctx.status(200), ctx.json([{ test: "hi" }]));
   }),
 
-  rest.get(`${process.env.REACT_APP_API_URL}/user_profile`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        fullName: "Test User One",
-        email: "test_user@gmail.com",
-        phoneNo: "811911112",
-        profileImgUrl: "https://picsum.photos/id/203/300",
-        bankAccounts: [
-          {
-            accountNo: "0122368991",
-            bankAbbrev: "DBS",
-            verificationStatus: "verified",
-          },
-          {
-            accountNo: "0744368552",
-            bankAbbrev: "UOB",
-            verificationStatus: "pending",
-          },
-        ],
-      })
-    );
-  }),
-
   rest.get(`${process.env.REACT_APP_API_URL}/transactions`, (req, res, ctx) => {
     const transactionID = req.url.searchParams.get("transactionID");
     const status = req.url.searchParams.get("status");
@@ -56,6 +32,65 @@ export const handlers = [
 
     return res(ctx.status(200), ctx.json(filteredTransactions));
   }),
+
+  rest.get(`${process.env.REACT_APP_API_URL}/user_profile`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        fullName: "Test User One",
+        email: "test_user@gmail.com",
+        phoneNo: "811911112",
+        profileImgUrl: "https://picsum.photos/id/203/300",
+        bankAccounts: [
+          {
+            id: 99,
+            accountNo: "0122368991",
+            bankAbbrev: "DBS",
+            verificationStatus: "verified",
+          },
+          {
+            id: 98,
+            accountNo: "0744368552",
+            bankAbbrev: "UOB",
+            verificationStatus: "pending",
+          },
+        ],
+      })
+    );
+  }),
+
+  rest.post(
+    `${process.env.REACT_APP_API_URL}/bank_account`,
+    (req, res, ctx) => {
+      const { accountNo, bankAbbrev } = req.body;
+
+      return res(
+        ctx.status(200),
+        ctx.json({
+          message: "Successfully added account",
+          account: {
+            id: Math.floor(Math.random() * 1000), // return random integer from 0 to 999
+            accountNo,
+            bankAbbrev,
+            verificationStatus: "pending",
+          },
+        })
+      );
+    }
+  ),
+
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}/bank_account/:id`,
+    (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          message: "Successfully deleted account",
+          id: +req.params.id,
+        })
+      );
+    }
+  ),
 ];
 
 const mockTransactions = [
