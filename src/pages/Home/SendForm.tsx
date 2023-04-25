@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Form, Select, Input, Button, Typography } from "antd";
+import { Form, Select, Input, Button, Typography, Modal } from "antd";
 import styled from "@emotion/styled";
 
 import { sendPayment } from "./reducer";
@@ -39,16 +39,21 @@ const Send = ({ accountsData }: { accountsData: Account[] }) => {
     <>
       <h5>Send Payments</h5>
       <Panel>
-        <div style={{ flexGrow: 1 }}>
+        <SubPanel>
           <Text>Simulate sending a transaction from your wallets!</Text>
-        </div>
-        <div style={{ flexGrow: 1 }}>
+        </SubPanel>
+        <SubPanel>
           <Form
             form={form}
             layout="vertical"
             onFinish={(values) => {
-              dispatch(sendPayment(values)).then(() => {
-                form.resetFields();
+              Modal.confirm({
+                title: "Confirm payment",
+                content: "This payment will be mocked in redux",
+                onOk: () =>
+                  dispatch(sendPayment(values)).then(() => {
+                    form.resetFields();
+                  }),
               });
             }}
           >
@@ -90,15 +95,48 @@ const Send = ({ accountsData }: { accountsData: Account[] }) => {
             <Form.Item
               label="Amount"
               name="amount"
-              rules={[{ required: true, message: "Field required" }]}
+              rules={[
+                {
+                  message: "Maximum of 2 decimal places",
+                  pattern: /^\d+\.?\d{1,2}$/,
+                },
+                {
+                  required: true,
+                  message: "Please input amount",
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    const selectedWallet = accountsData?.find(
+                      (a) => a.accountId === getFieldValue("walletId")
+                    );
+
+                    if (!selectedWallet) return;
+
+                    if (value < +(selectedWallet?.balance || 0)) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        `Can only transfer a maximum of ${selectedWallet?.currency.toUpperCase()}$${
+                          selectedWallet?.balance
+                        }`
+                      )
+                    );
+                  },
+                }),
+              ]}
             >
-              <Input prefix="$" placeholder="Input amount to be sent" />
+              <Input
+                prefix="$"
+                type="number"
+                placeholder="Input amount to be sent"
+              />
             </Form.Item>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
           </Form>
-        </div>
+        </SubPanel>
       </Panel>
     </>
   );
@@ -113,6 +151,10 @@ const Panel = styled.div`
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   box-sizing: border-box;
+`;
+
+const SubPanel = styled.div`
+  flex-grow: 1;
 `;
 
 const Option = styled.div`
