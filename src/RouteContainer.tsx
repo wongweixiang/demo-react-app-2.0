@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Transactions from "./pages/Transactions";
 import UserProfile from "./pages/UserProfile";
-import Send from "./pages/Send";
 
 import { PATHS } from "./constants";
 
@@ -16,7 +15,6 @@ const routesList: RouteType[] = [
   { path: PATHS.HOME, element: <Home /> },
   { path: PATHS.TRANSACTIONS, element: <Transactions /> },
   { path: PATHS.USER_PROFILE, element: <UserProfile /> },
-  { path: PATHS.SEND, element: <Send /> },
 ];
 
 const RouteContainer = () => {

@@ -20,15 +20,6 @@ const items = [
     ),
   },
   {
-    key: "i1",
-    label: (
-      <Space>
-        <SendOutlined />
-        <Link to={PATHS.SEND}>Send</Link>
-      </Space>
-    ),
-  },
-  {
     key: "i2",
     label: (
       <Space>
