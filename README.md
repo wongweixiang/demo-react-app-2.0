@@ -1,6 +1,5 @@
 # QuickPay, a demo React application
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application is a mock wallet service webapp (currently desktop-view, mobile view coming soon)
 
 The following technologies were used to create this app:
 
@@ -28,4 +27,7 @@ Displays the user's previous transactions and allows them to be filtered
 ### User Profile
 Displays personal information, allowing user to add and remove bank accounts which are linked to their wallets
 
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/61179854/234225762-22cb916a-b0f6-47f1-9c12-c7b47ae5c749.png">
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/61179854/234226845-0be63328-e588-414e-a85a-ae3e37f02c7a.png">
+
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/61179854/234226979-f98f1554-1117-423e-bd81-2478485e0826.png">
+
