@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import {
   HomeOutlined,
   InteractionOutlined,
-  SendOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Space } from "antd";

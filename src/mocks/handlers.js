@@ -1,8 +1,34 @@
 import { rest } from "msw";
 
 export const handlers = [
-  rest.get(`${process.env.REACT_APP_API_URL}/users`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json([{ test: "hi" }]));
+  rest.get(`${process.env.REACT_APP_API_URL}/accounts`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+          accountId: 1,
+          currency: "sgd",
+          balance: "830.00",
+        },
+        {
+          accountId: 2,
+          currency: "usd",
+          balance: "750.00",
+        },
+      ])
+    );
+  }),
+
+  rest.post(`${process.env.REACT_APP_API_URL}/send`, (req, res, ctx) => {
+    const { walletId, amount } = req.body;
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: "Transaction successful",
+        details: { walletId, amount },
+      })
+    );
   }),
 
   rest.get(`${process.env.REACT_APP_API_URL}/transactions`, (req, res, ctx) => {

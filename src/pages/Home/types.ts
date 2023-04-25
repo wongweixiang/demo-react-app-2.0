@@ -2,5 +2,8 @@ export type Account = {
   accountId: number;
   currency: string;
   balance: string;
-  type: string;
+};
+
+export type HomeState = {
+  accountsData: Account[];
 };

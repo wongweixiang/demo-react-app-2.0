@@ -1,29 +1,46 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import usersAPI from "../../api/users.api";
+import homeAPI from "../../api/home.api";
+import { HomeState } from "./types";
 
-export const fetchUsersTest = createAsyncThunk("home/fetchUsers", async () => {
-  const { data } = await usersAPI.getUsers();
-  return data;
-});
+export const fetchAccountsData = createAsyncThunk(
+  "home/fetchAccounts",
+  async () => {
+    const { data } = await homeAPI.getAccounts();
+    return data;
+  }
+);
+
+export const sendPayment = createAsyncThunk(
+  "home/sendPayment",
+  async (params: { recipientId: number; walletId: number; amount: string }) => {
+    const { data } = await homeAPI.sendTransaction(params);
+    return data;
+  }
+);
 
 const homeSlice = createSlice({
   name: "home",
   initialState: {
     accountsData: [],
-    users: [],
-  },
-  reducers: {
-    fetchAccountsData: (state, action) => {
-      state.accountsData = action.payload;
-    },
-  },
+  } as HomeState,
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchUsersTest.fulfilled, (state, action) => {
-      state.users = action.payload;
+    builder.addCase(fetchAccountsData.fulfilled, (state, action) => {
+      state.accountsData = action.payload;
+    });
+    builder.addCase(sendPayment.fulfilled, (state, action) => {
+      const { walletId, amount } = action.payload.details;
+
+      state.accountsData = state.accountsData.map((a) =>
+        a.accountId === walletId
+          ? {
+              ...a,
+              balance: (Number(a.balance) - amount).toFixed(2).toString(),
+            }
+          : a
+      );
     });
   },
 });
-
-export const { fetchAccountsData } = homeSlice.actions;
 
 export default homeSlice.reducer;
