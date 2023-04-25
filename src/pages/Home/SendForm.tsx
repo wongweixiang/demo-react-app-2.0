@@ -97,7 +97,7 @@ const Send = () => {
 
                     if (!selectedWallet) return;
 
-                    if (value < +(selectedWallet?.balance || 0)) {
+                    if (value <= +(selectedWallet?.balance || 0)) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
