@@ -6,12 +6,12 @@ export const handlers = [
       ctx.status(200),
       ctx.json([
         {
-          accountId: 1,
+          account_id: 1,
           currency: "sgd",
           balance: "830.00",
         },
         {
-          accountId: 2,
+          account_id: 2,
           currency: "usd",
           balance: "750.00",
         },
@@ -48,13 +48,13 @@ export const handlers = [
   }),
 
   rest.post(`${process.env.REACT_APP_API_URL}/send`, (req, res, ctx) => {
-    const { walletId, amount } = req.body;
+    const { wallet_id, amount } = req.body;
 
     return res(
       ctx.status(200),
       ctx.json({
         message: "Transaction successful",
-        details: { walletId, amount },
+        details: { wallet_id, amount },
       })
     );
   }),
@@ -91,22 +91,22 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        fullName: "Test User One",
+        full_name: "Test User One",
         email: "test_user@gmail.com",
-        phoneNo: "811911112",
-        profileImgUrl: "https://picsum.photos/id/203/300",
-        bankAccounts: [
+        phone_no: "811911112",
+        profile_img_url: "https://picsum.photos/id/203/300",
+        bank_accounts: [
           {
             id: 99,
-            accountNo: "0122368991",
-            bankAbbrev: "DBS",
-            verificationStatus: "verified",
+            account_no: "0122368991",
+            bank_abbrev: "DBS",
+            verification_status: "verified",
           },
           {
             id: 98,
-            accountNo: "0744368552",
-            bankAbbrev: "UOB",
-            verificationStatus: "pending",
+            account_no: "0744368552",
+            bank_abbrev: "UOB",
+            verification_status: "pending",
           },
         ],
       })
@@ -130,7 +130,7 @@ export const handlers = [
   rest.post(
     `${process.env.REACT_APP_API_URL}/bank_account`,
     (req, res, ctx) => {
-      const { accountNo, bankAbbrev } = req.body;
+      const { account_no, bank_abbrev } = req.body;
 
       return res(
         ctx.status(200),
@@ -138,9 +138,9 @@ export const handlers = [
           message: "Successfully added account",
           account: {
             id: Math.floor(Math.random() * 1000), // return random integer from 0 to 999
-            accountNo,
-            bankAbbrev,
-            verificationStatus: "pending",
+            account_no,
+            bank_abbrev,
+            verification_status: "pending",
           },
         })
       );
@@ -164,133 +164,133 @@ export const handlers = [
 const mockTransactions = [
   {
     id: "x202399000",
-    createdAt: "2022-11-09T17:19:18.000Z",
+    created_at: "2022-11-09T17:19:18.000Z",
     type: "Bank Transfer Out",
     amount: {
       direction: "-",
       currency: "usd",
-      netAmount: "$100.00",
+      net_amount: "$100.00",
     },
     status: "pending",
   },
   {
     id: "x202398000",
-    createdAt: "2022-11-05T15:19:18.000Z",
+    created_at: "2022-11-05T15:19:18.000Z",
     type: "Payment Received",
     amount: {
       direction: "+",
       currency: "sgd",
-      netAmount: "$250.00",
+      net_amount: "$250.00",
     },
     status: "completed",
   },
   {
     id: "x202396000",
-    createdAt: "2022-10-28T23:20:18.000Z",
+    created_at: "2022-10-28T23:20:18.000Z",
     type: "Payment Received",
     amount: {
       direction: "+",
       currency: "usd",
-      netAmount: "$150.00",
+      net_amount: "$150.00",
     },
     status: "completed",
   },
   {
     id: "x202391000",
-    createdAt: "2022-10-21T10:12:18.000Z",
+    created_at: "2022-10-21T10:12:18.000Z",
     type: "Payment Sent",
     amount: {
       direction: "-",
       currency: "sgd",
-      netAmount: "$592.45",
+      net_amount: "$592.45",
     },
     status: "cancelled",
   },
   {
     id: "x202387000",
-    createdAt: "2022-10-20T18:45:18.000Z",
+    created_at: "2022-10-20T18:45:18.000Z",
     type: "Bank Transfer In",
     amount: {
       direction: "+",
       currency: "sgd",
-      netAmount: "$183.90",
+      net_amount: "$183.90",
     },
     status: "completed",
   },
   {
     id: "x202375000",
-    createdAt: "2022-10-19T19:40:18.000Z",
+    created_at: "2022-10-19T19:40:18.000Z",
     type: "Bank Transfer In",
     amount: {
       direction: "+",
       currency: "sgd",
-      netAmount: "$99.90",
+      net_amount: "$99.90",
     },
     status: "cancelled",
   },
   {
     id: "x202371000",
-    createdAt: "2022-10-11T15:15:18.000Z",
+    created_at: "2022-10-11T15:15:18.000Z",
     type: "Payment Received",
     amount: {
       direction: "+",
       currency: "usd",
-      netAmount: "$420.55",
+      net_amount: "$420.55",
     },
     status: "completed",
   },
   {
     id: "x202369000",
-    createdAt: "2022-10-05T12:32:18.000Z",
+    created_at: "2022-10-05T12:32:18.000Z",
     type: "Bank Transfer Out",
     amount: {
       direction: "-",
       currency: "sgd",
-      netAmount: "$123.00",
+      net_amount: "$123.00",
     },
     status: "completed",
   },
   {
     id: "x202387000",
-    createdAt: "2022-10-02T18:45:18.000Z",
+    created_at: "2022-10-02T18:45:18.000Z",
     type: "Bank Transfer In",
     amount: {
       direction: "+",
       currency: "usd",
-      netAmount: "$15.00",
+      net_amount: "$15.00",
     },
     status: "expired",
   },
   {
     id: "x202387000",
-    createdAt: "2022-09-18T17:05:18.000Z",
+    created_at: "2022-09-18T17:05:18.000Z",
     type: "Bank Transfer In",
     amount: {
       direction: "+",
       currency: "usd",
-      netAmount: "$55.00",
+      net_amount: "$55.00",
     },
     status: "expired",
   },
   {
     id: "x202387000",
-    createdAt: "2022-09-12T10:12:18.000Z",
+    created_at: "2022-09-12T10:12:18.000Z",
     type: "Bank Transfer In",
     amount: {
       direction: "+",
       currency: "sgd",
-      netAmount: "$997.00",
+      net_amount: "$997.00",
     },
     status: "completed",
   },
   {
     id: "x202387000",
-    createdAt: "2022-09-08T15:53:18.000Z",
+    created_at: "2022-09-08T15:53:18.000Z",
     type: "Bank Transfer In",
     amount: {
       direction: "+",
       currency: "usd",
-      netAmount: "$880.00",
+      net_amount: "$880.00",
     },
     status: "completed",
   },
