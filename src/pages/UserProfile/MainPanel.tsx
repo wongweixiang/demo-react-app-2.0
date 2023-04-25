@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import {
   Card,
@@ -14,28 +14,25 @@ import {
 } from "antd";
 import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
-import { addBankAccount, deleteBankAccount } from "./reducer";
-import { AppDispatch } from "../../store";
+import { addBankAccount, deleteBankAccount, fetchBanks } from "./reducer";
+import { AppDispatch, RootState } from "../../store";
 import { BankAccount } from "./types";
-import svgMapper from "../../helpers/svgMapper";
+import SvgMapper from "../../helpers/SvgMapper";
 
 const { Text } = Typography;
 
 const MAX_NUMBER = 5;
 
-const banks = [
-  { value: "DBS", label: "DBS Bank" },
-  { value: "POSB", label: "POSB Bank" },
-  { value: "OCBC", label: "OCBC Bank" },
-  { value: "UOB", label: "United Overseas Bank" },
-  { value: "SC", label: "Standard Chartered Bank" },
-  { value: "HSBC", label: "HSBC Bank" },
-];
-
 const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
   const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    dispatch(fetchBanks());
+  }, []);
+
+  const { banks } = useSelector((state: RootState) => state.userProfile);
 
   return (
     <Panel>
@@ -73,7 +70,18 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
             name="bankAbbrev"
             rules={[{ required: true, message: "Field required" }]}
           >
-            <Select placeholder="Please choose a bank" options={banks} />
+            <Select
+              placeholder="Please choose a bank"
+              options={banks.map((b) => ({
+                value: b.value,
+                label: (
+                  <Option>
+                    <SvgMapper bankAbbrev={b.value} width="60px" />
+                    <span>{b.label}</span>
+                  </Option>
+                ),
+              }))}
+            />
           </Form.Item>
           <Form.Item
             label="Bank Account Number"
@@ -105,7 +113,7 @@ const AccountCard = ({ account }: { account: BankAccount }) => {
   return (
     <Card
       style={{ flexGrow: 1 }}
-      title={svgMapper(bankAbbrev)}
+      title={<SvgMapper bankAbbrev={bankAbbrev} />}
       extra={
         <Button
           onClick={() =>
@@ -179,4 +187,9 @@ const CardBody = styled.div`
 const AccountField = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Option = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

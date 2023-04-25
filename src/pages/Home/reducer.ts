@@ -10,6 +10,14 @@ export const fetchAccountsData = createAsyncThunk(
   }
 );
 
+export const fetchContacts = createAsyncThunk(
+  "home/fetchContacts",
+  async () => {
+    const { data } = await homeAPI.getContacts();
+    return data;
+  }
+);
+
 export const sendPayment = createAsyncThunk(
   "home/sendPayment",
   async (params: { recipientId: number; walletId: number; amount: string }) => {
@@ -22,11 +30,15 @@ const homeSlice = createSlice({
   name: "home",
   initialState: {
     accountsData: [],
+    contacts: [],
   } as HomeState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAccountsData.fulfilled, (state, action) => {
       state.accountsData = action.payload;
+    });
+    builder.addCase(fetchContacts.fulfilled, (state, action) => {
+      state.contacts = action.payload;
     });
     builder.addCase(sendPayment.fulfilled, (state, action) => {
       const { walletId, amount } = action.payload.details;

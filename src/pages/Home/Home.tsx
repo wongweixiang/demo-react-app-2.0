@@ -6,23 +6,24 @@ import styled from "@emotion/styled";
 
 import SendForm from "./SendForm";
 import { fetchAccountsData } from "./reducer";
+import { fetchUserProfile } from "../UserProfile/reducer";
 import { Account } from "./types";
 import { AppDispatch, RootState } from "../../store";
-
-const username = "Test User One";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchUserProfile());
     dispatch(fetchAccountsData());
   }, []);
 
   const { accountsData } = useSelector((state: RootState) => state.home);
+  const { fullName } = useSelector((state: RootState) => state.userProfile);
 
   return (
     <>
-      <h1>Hello, {username}!</h1>
+      <h1>Hello, {fullName}!</h1>
 
       <h3>My Wallets</h3>
       <CardContainer>
@@ -43,7 +44,7 @@ const Home = () => {
           </WalletCard>
         ))}
       </CardContainer>
-      <SendForm accountsData={accountsData} />
+      <SendForm />
     </>
   );
 };

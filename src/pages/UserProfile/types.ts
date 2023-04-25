@@ -11,4 +11,5 @@ export type UserProfileState = {
   phoneNo: string;
   profileImgUrl: string;
   bankAccounts: BankAccount[];
+  banks: { value: string; label: string }[];
 };

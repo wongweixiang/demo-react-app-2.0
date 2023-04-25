@@ -19,6 +19,34 @@ export const handlers = [
     );
   }),
 
+  rest.get(`${process.env.REACT_APP_API_URL}/contacts`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+          id: 101,
+          name: "Tony",
+          email: "tony_stark@gmail.com",
+        },
+        {
+          id: 102,
+          name: "Steve",
+          email: "steve.rogers@avengers.org",
+        },
+        {
+          id: 103,
+          name: "Natasha",
+          email: "natasha.romanoff@redroom.ussr",
+        },
+        {
+          id: 104,
+          name: "Wanda",
+          email: "wanda_maximoff@vision.town",
+        },
+      ])
+    );
+  }),
+
   rest.post(`${process.env.REACT_APP_API_URL}/send`, (req, res, ctx) => {
     const { walletId, amount } = req.body;
 
@@ -82,6 +110,20 @@ export const handlers = [
           },
         ],
       })
+    );
+  }),
+
+  rest.get(`${process.env.REACT_APP_API_URL}/banks`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        { value: "DBS", label: "DBS Bank" },
+        { value: "POSB", label: "POSB Bank" },
+        { value: "OCBC", label: "OCBC Bank" },
+        { value: "UOB", label: "United Overseas Bank" },
+        { value: "SC", label: "Standard Chartered Bank" },
+        { value: "HSBC", label: "HSBC Bank" },
+      ])
     );
   }),
 

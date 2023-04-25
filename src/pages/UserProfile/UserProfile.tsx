@@ -9,13 +9,13 @@ import { AppDispatch, RootState } from "../../store";
 
 const UserProfile = () => {
   const dispatch: AppDispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchUserProfile());
-  }, []);
-
   const { fullName, email, phoneNo, profileImgUrl, bankAccounts } = useSelector(
     (state: RootState) => state.userProfile
   );
+
+  useEffect(() => {
+    if (!fullName) dispatch(fetchUserProfile());
+  }, []);
 
   return (
     <>

@@ -1,39 +1,24 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Select, Input, Button, Typography, Modal } from "antd";
 import styled from "@emotion/styled";
 
-import { sendPayment } from "./reducer";
-import { Account } from "./types";
-import { AppDispatch } from "../../store";
+import { fetchContacts, sendPayment } from "./reducer";
+import { AppDispatch, RootState } from "../../store";
 
 const { Text } = Typography;
 
-const Send = ({ accountsData }: { accountsData: Account[] }) => {
+const Send = () => {
   const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const contacts = [
-    {
-      id: 101,
-      name: "Tony",
-      email: "tony_stark@gmail.com",
-    },
-    {
-      id: 102,
-      name: "Steve",
-      email: "steve.rogers@avengers.org",
-    },
-    {
-      id: 103,
-      name: "Natasha",
-      email: "natasha.romanoff@redroom.ussr",
-    },
-    {
-      id: 104,
-      name: "Wanda",
-      email: "wanda_maximoff@vision.town",
-    },
-  ];
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, []);
+
+  const { accountsData, contacts } = useSelector(
+    (state: RootState) => state.home
+  );
 
   return (
     <>

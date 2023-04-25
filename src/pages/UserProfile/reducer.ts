@@ -10,6 +10,14 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
+export const fetchBanks = createAsyncThunk(
+  "userProfile/fetchBanks",
+  async () => {
+    const { data } = await userProfileAPI.getBanks();
+    return data;
+  }
+);
+
 export const addBankAccount = createAsyncThunk(
   "userProfile/addBankAccount",
   async (params: { accountNo: string; bankAbbrev: string }) => {
@@ -34,6 +42,7 @@ const userProfileSlice = createSlice({
     phoneNo: "",
     profileImgUrl: "",
     bankAccounts: [],
+    banks: [],
   } as UserProfileState,
   reducers: {},
   extraReducers: (builder) => {
@@ -42,6 +51,9 @@ const userProfileSlice = createSlice({
         ...state,
         ...action.payload,
       };
+    });
+    builder.addCase(fetchBanks.fulfilled, (state, action) => {
+      state.banks = action.payload;
     });
     builder.addCase(addBankAccount.fulfilled, (state, action) => {
       state.bankAccounts = [...state.bankAccounts, action.payload.account];

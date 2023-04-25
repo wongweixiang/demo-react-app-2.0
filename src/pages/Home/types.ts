@@ -4,6 +4,13 @@ export type Account = {
   balance: string;
 };
 
+export type Contact = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 export type HomeState = {
   accountsData: Account[];
+  contacts: Contact[];
 };
