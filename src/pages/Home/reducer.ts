@@ -40,18 +40,6 @@ const homeSlice = createSlice({
     builder.addCase(fetchContacts.fulfilled, (state, action) => {
       state.contacts = action.payload;
     });
-    builder.addCase(sendPayment.fulfilled, (state, action) => {
-      const { walletId, amount } = action.payload.details;
-
-      state.accountsData = state.accountsData.map((a) =>
-        a.accountId === walletId
-          ? {
-              ...a,
-              balance: (Number(a.balance) - amount).toFixed(2).toString(),
-            }
-          : a
-      );
-    });
   },
 });
 

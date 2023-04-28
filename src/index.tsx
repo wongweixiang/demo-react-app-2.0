@@ -12,6 +12,15 @@ async function main() {
     window.location.pathname = "/demo-react-app/";
   }
 
+  // wallet balances are loaded into sessionStorage, so they will persist across refreshes
+  if (
+    !sessionStorage.getItem("wallet_1_balance") ||
+    !sessionStorage.getItem("wallet_2_balance")
+  ) {
+    sessionStorage.setItem("wallet_1_balance", "830.00");
+    sessionStorage.setItem("wallet_2_balance", "750.00");
+  }
+
   const { worker } = require("./mocks/browser");
   await worker.start({
     serviceWorker: {

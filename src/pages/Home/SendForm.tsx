@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Select, Input, Button, Typography, Modal } from "antd";
 import styled from "@emotion/styled";
 
-import { fetchContacts, sendPayment } from "./reducer";
+import { fetchContacts, sendPayment, fetchAccountsData } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
 
 const { Text } = Typography;
@@ -34,10 +34,11 @@ const Send = () => {
             onFinish={(values) => {
               Modal.confirm({
                 title: "Confirm payment",
-                content: "This payment will be mocked in redux",
+                content: "This payment will be mocked (using browser cache)",
                 onOk: () =>
                   dispatch(sendPayment(values)).then(() => {
                     form.resetFields();
+                    dispatch(fetchAccountsData());
                   }),
               });
             }}
