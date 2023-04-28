@@ -4,3 +4,10 @@ export enum PATHS {
   USER_PROFILE = "/demo-react-app/user_profile",
   SEND = "/demo-react-app/send",
 }
+
+export enum SCREEN_SIZES {
+  SMALL = "600px",
+  MEDIUM = "768px",
+  LARGE = "992px",
+  EXTRA_LARGE = "1200px",
+}

@@ -6,6 +6,7 @@ import MainPanel from "./MainPanel";
 
 import { fetchUserProfile } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
+import { SCREEN_SIZES } from "../../constants";
 
 const UserProfile = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -35,6 +36,12 @@ const UserProfile = () => {
 
 const Body = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    flex-direction: row;
+  }
+
   height: 100%;
   width: 100%;
   gap: 1rem;

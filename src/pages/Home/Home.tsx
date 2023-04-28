@@ -9,6 +9,7 @@ import { fetchAccountsData } from "./reducer";
 import { fetchUserProfile } from "../UserProfile/reducer";
 import { Account } from "./types";
 import { AppDispatch, RootState } from "../../store";
+import { SCREEN_SIZES } from "../../constants";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -51,7 +52,13 @@ const Home = () => {
 
 const CardContainer = styled.div`
   display: flex;
-  height: 180px;
+  flex-direction: column;
+
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    flex-direction: row;
+  }
+
+  height: auto;
   width: 100%;
   gap: 1rem;
 `;

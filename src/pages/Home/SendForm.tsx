@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 
 import { fetchContacts, sendPayment, fetchAccountsData } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
+import { SCREEN_SIZES } from "../../constants";
 
 const { Text } = Typography;
 
@@ -132,6 +133,11 @@ export default Send;
 
 const Panel = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: ${SCREEN_SIZES.MEDIUM}) {
+    flex-direction: row;
+  }
 
   padding: 20px;
   border: 1px solid #d9d9d9;

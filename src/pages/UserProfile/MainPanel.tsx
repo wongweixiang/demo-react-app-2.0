@@ -18,6 +18,7 @@ import { addBankAccount, deleteBankAccount, fetchBanks } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
 import { BankAccount } from "./types";
 import SvgMapper from "../../helpers/SvgMapper";
+import { SCREEN_SIZES } from "../../constants";
 
 const { Text } = Typography;
 
@@ -166,11 +167,16 @@ const Title = styled.h5`
 `;
 
 const AccountsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 
   margin-top: 15px;
-  height: 180px;
+  height: auto;
   width: 100%;
   gap: 1rem;
 `;
