@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Transactions from "./pages/Transactions";
 import UserProfile from "./pages/UserProfile";
 
-import { PATHS } from "./constants";
+import { PATHS, SCREEN_SIZES } from "./constants";
 
 type RouteType = {
   path: string;
@@ -31,7 +31,11 @@ const RouteContainer = () => {
 };
 
 const Container = styled.div`
-  margin: 0px 50px;
+  margin: 55px 50px 10px;
+
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    margin: 0px 50px 10px;
+  }
 `;
 
 export default RouteContainer;

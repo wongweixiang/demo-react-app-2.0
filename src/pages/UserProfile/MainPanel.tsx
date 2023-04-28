@@ -160,6 +160,9 @@ const Panel = styled.div`
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   padding: 20px;
+
+  min-width: 300px;
+  box-sizing: border-box;
 `;
 
 const Title = styled.h5`
@@ -173,6 +176,11 @@ const AccountsContainer = styled.div`
   @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  @media only screen and (min-width: ${SCREEN_SIZES.EXTRA_LARGE}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   margin-top: 15px;

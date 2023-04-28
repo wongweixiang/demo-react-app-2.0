@@ -67,12 +67,14 @@ const NavRef = styled.div`
 `;
 
 const AppHead = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
   box-sizing: border-box;
   padding: 20px;
 
   background: #001529;
+  width: 100%;
   height: 55px;
 
   @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
