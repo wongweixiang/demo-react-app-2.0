@@ -72,6 +72,7 @@ const AppHead = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding: 20px;
+  z-index: 5;
 
   background: #001529;
   width: 100%;

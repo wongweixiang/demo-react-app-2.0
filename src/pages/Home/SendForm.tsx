@@ -25,7 +25,7 @@ const Send = () => {
     <>
       <h5>Send Payments</h5>
       <Panel>
-        <SubPanel>
+        <SubPanel style={{ marginBottom: "30px" }}>
           <Text>Simulate sending a transaction from your wallets!</Text>
         </SubPanel>
         <SubPanel>
