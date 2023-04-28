@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Space } from "antd";
-import { PATHS } from "./constants";
+import { PATHS, SCREEN_SIZES } from "./constants";
 
 const items = [
   {
@@ -38,9 +38,9 @@ const items = [
   },
 ];
 
-const Navigation = () => {
+const Navigation = ({ isDisplayed }: { isDisplayed: boolean }) => {
   return (
-    <Wrapper>
+    <Wrapper isDisplayed={isDisplayed}>
       <Logo>QuickPay</Logo>
       <Menu
         style={{ width: "100%", height: "100%" }}
@@ -52,8 +52,27 @@ const Navigation = () => {
   );
 };
 
+type WrapperProps = {
+  isDisplayed: boolean;
+};
+
 const Wrapper = styled.div`
+  display: ${(props: WrapperProps) => (props.isDisplayed ? "block" : "none")};
+  position: absolute;
+  height: 100%;
+  border-right: 1px solid white;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    display: block;
+    position: static;
+    height: auto;
+    border-right: none;
+    box-shadow: none;
+  }
+
   min-width: 250px;
+  z-index: 10;
 `;
 
 const Logo = styled.div`

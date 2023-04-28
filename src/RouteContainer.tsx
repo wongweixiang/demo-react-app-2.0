@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "@emotion/styled";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Transactions from "./pages/Transactions";
@@ -19,12 +20,18 @@ const routesList: RouteType[] = [
 
 const RouteContainer = () => {
   return (
-    <Routes>
-      {routesList.map((r) => (
-        <Route key={r.path} path={r.path} element={r.element} />
-      ))}
-    </Routes>
+    <Container>
+      <Routes>
+        {routesList.map((r) => (
+          <Route key={r.path} path={r.path} element={r.element} />
+        ))}
+      </Routes>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin: 0px 50px;
+`;
 
 export default RouteContainer;
