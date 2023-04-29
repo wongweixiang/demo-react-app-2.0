@@ -31,7 +31,7 @@ const RouteContainer = () => {
 };
 
 const Container = styled.div`
-  margin: 55px 50px 10px;
+  margin: 55px 15px 10px;
 
   @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
     margin: 0px 50px 10px;

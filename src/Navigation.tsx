@@ -32,7 +32,7 @@ const items = [
     label: (
       <Space>
         <UserOutlined />
-        <Link to={PATHS.USER_PROFILE}>User Profile</Link>
+        <Link to={PATHS.USER_PROFILE}>Profile</Link>
       </Space>
     ),
   },

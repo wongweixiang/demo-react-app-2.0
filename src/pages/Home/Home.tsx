@@ -66,6 +66,7 @@ const CardContainer = styled.div`
 const WalletCard = styled(Card)`
   flex-grow: 1;
   border-color: #d9d9d9;
+  user-select: none;
 
   .ant-card-head {
     background-color: #001529;

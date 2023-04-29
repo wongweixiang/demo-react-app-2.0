@@ -102,8 +102,13 @@ const Panel = styled.div`
   flex-direction: column;
   min-width: 300px;
 
-  padding: 20px;
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
+  padding: 0px;
+  border: none;
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+  }
+
   box-sizing: border-box;
 `;
