@@ -65,6 +65,11 @@ const CardContainer = styled.div`
 
 const WalletCard = styled(Card)`
   flex-grow: 1;
+  border-color: #d9d9d9;
+
+  .ant-card-head {
+    background-color: #001529;
+  }
 `;
 
 const CardBody = styled.div`
@@ -74,7 +79,10 @@ const CardBody = styled.div`
 
 const Title = styled.div`
   display: flex;
-  font-size: 18px;
+  align-items: center;
+
+  color: #99d6ff;
+  font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
   gap: 0.5rem;
