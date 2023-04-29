@@ -57,8 +57,11 @@ type WrapperProps = {
 };
 
 const Wrapper = styled.div`
-  display: ${(props: WrapperProps) => (props.isDisplayed ? "block" : "none")};
+  display: block;
   position: fixed;
+  left: ${(props: WrapperProps) => (props.isDisplayed ? "0px" : "-251px")};
+  transition: left 0.5s ease-out;
+
   height: 100%;
   border-right: 1px solid white;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
