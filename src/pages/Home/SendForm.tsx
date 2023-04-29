@@ -114,7 +114,7 @@ const Send = () => {
               ]}
             >
               <Input
-                prefix="$"
+                addonBefore="$"
                 type="number"
                 placeholder="Input amount to be sent"
               />
