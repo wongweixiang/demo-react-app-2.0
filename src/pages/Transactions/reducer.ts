@@ -11,13 +11,22 @@ export const fetchTransactions = createAsyncThunk(
 
 const transactionsSlice = createSlice({
   name: "transactions",
-  initialState: { transactions: [] },
-  reducers: {},
+  initialState: {
+    transactions: [],
+    pagination: { currentPage: 1, pageSize: 5 },
+  },
+  reducers: {
+    updatePage(state, action) {
+      state.pagination.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTransactions.fulfilled, (state, action) => {
       state.transactions = action.payload;
     });
   },
 });
+
+export const { updatePage } = transactionsSlice.actions;
 
 export default transactionsSlice.reducer;

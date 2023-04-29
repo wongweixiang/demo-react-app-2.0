@@ -1,43 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
-import { Table, Tag, Select, Input } from "antd";
-import dayjs from "dayjs";
+import { Select, Input } from "antd";
+
+import DesktopView from "./DesktopView";
+import MobileView from "./MobileView";
 
 import { fetchTransactions } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
-
-const columns = [
-  {
-    dataIndex: "id",
-    title: "Transaction ID",
-  },
-  {
-    dataIndex: "createdAt",
-    title: "Created At",
-    render: (d: string) => {
-      return <>{dayjs(d).format("DD MMM YYYY, HH:mm")}</>;
-    },
-  },
-  {
-    dataIndex: "type",
-    title: "Transaction Type",
-  },
-  {
-    dataIndex: "amount",
-    title: "Amount",
-    render: (a: Record<string, string>) => {
-      return <>{`${a.direction} ${a.currency.toUpperCase()}${a.netAmount}`}</>;
-    },
-  },
-  {
-    dataIndex: "status",
-    title: "Status",
-    render: (s: string) => {
-      return <StatusTag status={s} />;
-    },
-  },
-];
+import { SCREEN_SIZES } from "../../constants";
 
 const { Search } = Input;
 
@@ -63,12 +34,10 @@ const Transactions = () => {
         <Filters>
           <Search
             placeholder="Search by transaction ID"
-            style={{ width: "230px" }}
             onSearch={(e) => setTransactionID(e)}
           />
           <Select
             placeholder="Select a status"
-            style={{ width: "200px" }}
             mode="multiple"
             onChange={(e) => setStatus(e)}
             options={statuses.map((s) => {
@@ -81,34 +50,16 @@ const Transactions = () => {
           <Select
             placeholder="Select a transaction type"
             mode="multiple"
-            style={{ width: "250px" }}
             onChange={(e) => setTransactionType(e)}
             options={transactionTypes.map((t) => {
               return { value: t, label: t };
             })}
           />
         </Filters>
-        <Table
-          columns={columns}
-          dataSource={transactions}
-          pagination={{ pageSize: 5 }}
-        />
+        <DesktopView transactions={transactions} />
+        <MobileView transactions={transactions} />
       </Panel>
     </>
-  );
-};
-
-const StatusTag = ({ status }: { status: string }) => {
-  const colourMapping: Record<string, string> = {
-    completed: "green",
-    cancelled: "red",
-    pending: "gold",
-  };
-
-  return (
-    <Tag color={colourMapping[status]} style={{ textTransform: "capitalize" }}>
-      {status}
-    </Tag>
   );
 };
 
@@ -125,6 +76,19 @@ const transactionTypes = [
 
 const Filters = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media only screen and (min-width: ${SCREEN_SIZES.LARGE}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr;
+  }
+
   gap: 0.5rem;
   background-color: #fbfbfb;
   border-radius: 5px;
@@ -136,6 +100,7 @@ const Filters = styled.div`
 const Panel = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 300px;
 
   padding: 20px;
   border: 1px solid #d9d9d9;
