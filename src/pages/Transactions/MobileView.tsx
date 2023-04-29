@@ -23,21 +23,23 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
   return (
     <View>
       {transactionsOnCurrentPage.map((t: Transaction) => {
-        const { direction, currency, netAmount } = t.amount;
+        const { id, status, amount, type, createdAt } = t;
+        const { direction, currency, netAmount } = amount;
 
         return (
           <Card
+            key={id}
             title={
               <b>{`${direction} ${currency.toUpperCase()}${netAmount}`}</b>
             }
-            extra={<StatusTag status={t.status} />}
+            extra={<StatusTag status={status} />}
           >
             <CardBody>
               <div>
-                <b>{t.type}</b>
-                <div>ID: {t.id}</div>
+                <b>{type}</b>
+                <div>ID: {id}</div>
               </div>
-              <div>{dayjs(t.createdAt).format("DD MMM YYYY, HH:mm")}</div>
+              <div>{dayjs(createdAt).format("DD MMM YYYY, HH:mm")}</div>
             </CardBody>
           </Card>
         );

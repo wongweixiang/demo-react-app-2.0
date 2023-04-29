@@ -51,6 +51,7 @@ const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
   return (
     <View>
       <Table
+        rowKey="id"
         columns={columns}
         dataSource={transactions}
         pagination={{ current: currentPage, pageSize }}
