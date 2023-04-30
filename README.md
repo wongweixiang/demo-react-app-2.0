@@ -1,4 +1,5 @@
 # QuickPay, a demo React application
+
 This application is a mock wallet service webapp (both desktop and mobile view available)
 The following technologies were used to create this app:
 
@@ -14,7 +15,8 @@ The following technologies were used to create this app:
 ## Features
 
 ### Home
-Lists the user's available wallets, and allows the user to send payments to their list of contacts (transactions are mocked in redux)
+
+Lists the user's available wallets, and allows the user to send payments to their list of contacts (transactions are mocked in browser cache)
 
 <table>
   <tr>
@@ -41,8 +43,8 @@ Displays the user's previous transactions and allows them to be filtered
   </tr>
 </table>
 
-
 ### User Profile
+
 Displays personal information, allowing user to add and remove bank accounts which are linked to their wallets
 
 <table>
@@ -63,10 +65,3 @@ Displays personal information, allowing user to add and remove bank accounts whi
     </td>
   </tr>
 </table>
-
-
-
-
-
-
-

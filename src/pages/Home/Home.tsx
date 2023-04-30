@@ -5,9 +5,9 @@ import { DollarTwoTone } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 import SendForm from "./SendForm";
-import { fetchAccountsData } from "./reducer";
+import { fetchWallets } from "./reducer";
 import { fetchUserProfile } from "../UserProfile/reducer";
-import { Account } from "./types";
+import { Wallet } from "./types";
 import { AppDispatch, RootState } from "../../store";
 import { SCREEN_SIZES } from "../../constants";
 
@@ -16,10 +16,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-    dispatch(fetchAccountsData());
+    dispatch(fetchWallets());
   }, []);
 
-  const { accountsData } = useSelector((state: RootState) => state.home);
+  const { wallets } = useSelector((state: RootState) => state.home);
   const { fullName } = useSelector((state: RootState) => state.userProfile);
 
   return (
@@ -28,19 +28,19 @@ const Home = () => {
 
       <h3>My Wallets</h3>
       <CardContainer>
-        {accountsData.map((a: Account) => (
+        {wallets.map((w: Wallet) => (
           <WalletCard
-            key={a.accountId}
+            key={w.walletId}
             title={
               <Title>
                 <DollarTwoTone style={{ fontSize: "24px" }} />
-                {a.currency}
+                {w.currency}
               </Title>
             }
           >
             <CardBody>
               <b>Balance:</b>
-              <b style={{ fontSize: "32px" }}>${a.balance}</b>
+              <b style={{ fontSize: "32px" }}>${w.balance}</b>
             </CardBody>
           </WalletCard>
         ))}

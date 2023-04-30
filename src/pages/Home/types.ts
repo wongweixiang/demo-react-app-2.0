@@ -1,5 +1,5 @@
-export type Account = {
-  accountId: number;
+export type Wallet = {
+  walletId: number;
   currency: string;
   balance: string;
 };
@@ -11,6 +11,6 @@ export type Contact = {
 };
 
 export type HomeState = {
-  accountsData: Account[];
+  wallets: Wallet[];
   contacts: Contact[];
 };

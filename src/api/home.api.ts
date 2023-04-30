@@ -1,7 +1,7 @@
 import apiClient from "../helpers/apiClient";
 
 class HomeAPI {
-  getAccounts = () => apiClient().get("/accounts");
+  getWallets = () => apiClient().get("/wallets");
   getContacts = () => apiClient().get("/contacts");
   sendTransaction = (params: {
     recipientId: number;

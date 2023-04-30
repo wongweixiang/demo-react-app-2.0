@@ -2,13 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import homeAPI from "../../api/home.api";
 import { HomeState } from "./types";
 
-export const fetchAccountsData = createAsyncThunk(
-  "home/fetchAccounts",
-  async () => {
-    const { data } = await homeAPI.getAccounts();
-    return data;
-  }
-);
+export const fetchWallets = createAsyncThunk("home/fetchAccounts", async () => {
+  const { data } = await homeAPI.getWallets();
+  return data;
+});
 
 export const fetchContacts = createAsyncThunk(
   "home/fetchContacts",
@@ -29,13 +26,13 @@ export const sendPayment = createAsyncThunk(
 const homeSlice = createSlice({
   name: "home",
   initialState: {
-    accountsData: [],
+    wallets: [],
     contacts: [],
   } as HomeState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAccountsData.fulfilled, (state, action) => {
-      state.accountsData = action.payload;
+    builder.addCase(fetchWallets.fulfilled, (state, action) => {
+      state.wallets = action.payload;
     });
     builder.addCase(fetchContacts.fulfilled, (state, action) => {
       state.contacts = action.payload;

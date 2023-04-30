@@ -1,9 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Select, Input, Button, Typography, Modal } from "antd";
+import {
+  Form,
+  Select,
+  Input,
+  Button,
+  Typography,
+  Modal,
+  notification,
+} from "antd";
 import styled from "@emotion/styled";
 
-import { fetchContacts, sendPayment, fetchAccountsData } from "./reducer";
+import { fetchContacts, sendPayment, fetchWallets } from "./reducer";
+import { Wallet } from "./types";
 import { AppDispatch, RootState } from "../../store";
 import { SCREEN_SIZES } from "../../constants";
 
@@ -17,9 +26,23 @@ const Send = () => {
     dispatch(fetchContacts());
   }, []);
 
-  const { accountsData, contacts } = useSelector(
-    (state: RootState) => state.home
-  );
+  const { wallets, contacts } = useSelector((state: RootState) => state.home);
+
+  const openNotification = (payload: {
+    message: string;
+    details: Record<string, unknown>;
+  }) => {
+    const { message, details } = payload;
+    const targetWallet = wallets.find((w) => w.walletId === details.walletId);
+
+    notification.open({
+      message: <b>{message}</b>,
+      description: `${targetWallet?.currency.toUpperCase()}$${
+        details.amount
+      } has been sent`,
+      duration: 2,
+    });
+  };
 
   return (
     <>
@@ -37,9 +60,10 @@ const Send = () => {
                 title: "Confirm payment",
                 content: "This payment will be mocked (using browser cache)",
                 onOk: () =>
-                  dispatch(sendPayment(values)).then(() => {
+                  dispatch(sendPayment(values)).then(({ payload }) => {
+                    openNotification(payload);
                     form.resetFields();
-                    dispatch(fetchAccountsData());
+                    dispatch(fetchWallets());
                   }),
               });
             }}
@@ -51,12 +75,12 @@ const Send = () => {
             >
               <Select
                 placeholder="Please choose a wallet"
-                options={accountsData.map((a) => ({
-                  value: a.accountId,
+                options={wallets.map((w: Wallet) => ({
+                  value: w.walletId,
                   label: (
                     <Option>
-                      <b>{a.currency.toUpperCase()}</b>{" "}
-                      <span>${a.balance}</span>
+                      <b>{w.currency.toUpperCase()}</b>{" "}
+                      <span>${w.balance}</span>
                     </Option>
                   ),
                 }))}
@@ -93,8 +117,8 @@ const Send = () => {
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    const selectedWallet = accountsData?.find(
-                      (a) => a.accountId === getFieldValue("walletId")
+                    const selectedWallet = wallets?.find(
+                      (w) => w.walletId === getFieldValue("walletId")
                     );
 
                     if (!selectedWallet) return;

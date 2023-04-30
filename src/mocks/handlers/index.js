@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import {
-  getAccountsResolver,
+  getWalletsResolver,
   getContactsResolver,
   postSendResolver,
 } from "./home.resolver";
@@ -15,7 +15,7 @@ import {
 const baseUrl = process.env.REACT_APP_API_URL;
 
 export const handlers = [
-  rest.get(`${baseUrl}/accounts`, getAccountsResolver),
+  rest.get(`${baseUrl}/wallets`, getWalletsResolver),
   rest.get(`${baseUrl}/contacts`, getContactsResolver),
   rest.post(`${baseUrl}/send`, postSendResolver),
 
