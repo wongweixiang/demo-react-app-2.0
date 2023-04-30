@@ -22,23 +22,23 @@ export const getContactsResolver = (req, res, ctx) => {
     ctx.json([
       {
         id: 101,
-        name: "Tony",
-        email: "tony_stark@gmail.com",
+        name: "Tony Stark",
+        email: "tony@gmail.com",
       },
       {
         id: 102,
-        name: "Steve",
-        email: "steve.rogers@avengers.org",
+        name: "Steve Rogers",
+        email: "steve@avengers.org",
       },
       {
         id: 103,
-        name: "Natasha",
-        email: "natasha.romanoff@redroom.ussr",
+        name: "Natasha Romanoff",
+        email: "natasha@redroom.ussr",
       },
       {
         id: 104,
-        name: "Wanda",
-        email: "wanda_maximoff@vision.town",
+        name: "Wanda Maximoff",
+        email: "wanda@vision.town",
       },
     ])
   );
