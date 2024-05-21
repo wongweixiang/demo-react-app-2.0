@@ -1,11 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import styled from "@emotion/styled";
 import { Pagination, Card } from "antd";
 import dayjs from "dayjs";
 
 import { AppDispatch, RootState } from "../../store";
-import { SCREEN_SIZES } from "../../constants";
 import StatusTag from "./StatusTag";
 import { Transaction } from "./types";
 import { updatePage } from "./reducer";
@@ -21,7 +19,7 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
   const transactionsOnCurrentPage = transactions.slice(startIndex, endIndex);
 
   return (
-    <View>
+    <div className="flex flex-col gap-4 sm:hidden">
       {transactionsOnCurrentPage.map((t: Transaction) => {
         const { id, status, amount, type, createdAt } = t;
         const { direction, currency, netAmount } = amount;
@@ -34,13 +32,13 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
             }
             extra={<StatusTag status={status} />}
           >
-            <CardBody>
+            <div className="flex justify-center content-end items-end box-border">
               <div>
                 <b>{type}</b>
                 <div>ID: {id}</div>
               </div>
               <div>{dayjs(createdAt).format("DD MMM YYYY, HH:mm")}</div>
-            </CardBody>
+            </div>
           </Card>
         );
       })}
@@ -50,27 +48,8 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
         total={transactions.length}
         onChange={(page) => dispatch(updatePage(page))}
       />
-    </View>
+    </div>
   );
 };
 
 export default MobileView;
-
-const View = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    display: none;
-  }
-`;
-
-const CardBody = styled.div`
-  display: flex;
-
-  box-sizing: border-box;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-content: flex-end;
-`;

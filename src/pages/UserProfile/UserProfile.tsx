@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "@emotion/styled";
 import ProfilePanel from "./ProfilePanel";
 import MainPanel from "./MainPanel";
 
 import { fetchUserProfile } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
-import { SCREEN_SIZES } from "../../constants";
 
 const UserProfile = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -21,7 +19,7 @@ const UserProfile = () => {
   return (
     <>
       <h3>User Profile</h3>
-      <Body>
+      <div className="flex flex-col sm:flex-row h-full w-full mb-3 gap-4">
         <ProfilePanel
           profileImgUrl={profileImgUrl}
           fullName={fullName}
@@ -29,23 +27,9 @@ const UserProfile = () => {
           phoneNo={phoneNo}
         />
         <MainPanel bankAccounts={bankAccounts} />
-      </Body>
+      </div>
     </>
   );
 };
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    flex-direction: row;
-  }
-
-  height: 100%;
-  width: 100%;
-  gap: 1rem;
-  margin-bottom: 10px;
-`;
 
 export default UserProfile;

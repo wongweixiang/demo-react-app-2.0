@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1, h2, h3, h4, h5 {
+    @apply font-bold
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl my-7
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl my-5
+  }
+
+  h5 {
+    @apply text-lg my-5
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -26,4 +44,18 @@ input::-webkit-inner-spin-button {
 /* Works for Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.card-head {
+  .ant-card-head {
+    background-color: #001529;
+  }
+}
+
+.no-border {
+  border: none;
+}
+
+.grey-border {
+@apply border-solid border border-gray-300 rounded box-border
 }

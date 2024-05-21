@@ -37,7 +37,7 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
 
   return (
     <Panel>
-      <Title>Bank Accounts</Title>
+      <h5 className="m-0">Bank Accounts</h5>
       <Tooltip
         title={`You may add a maximum of ${MAX_NUMBER} accounts`}
         placement="bottomLeft"
@@ -163,10 +163,6 @@ const Panel = styled.div`
 
   min-width: 300px;
   box-sizing: border-box;
-`;
-
-const Title = styled.h5`
-  margin: 0px;
 `;
 
 const AccountsContainer = styled.div`

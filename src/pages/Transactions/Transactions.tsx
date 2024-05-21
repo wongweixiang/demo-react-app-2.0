@@ -30,7 +30,7 @@ const Transactions = () => {
   return (
     <>
       <h3>Transactions</h3>
-      <Panel>
+      <div className="flex flex-col min-w-[300px] p-0 sm:p-5 no-border sm:grey-border box-border">
         <Filters>
           <Search
             placeholder="Search by transaction ID"
@@ -58,7 +58,7 @@ const Transactions = () => {
         </Filters>
         <DesktopView transactions={transactions} />
         <MobileView transactions={transactions} />
-      </Panel>
+      </div>
     </>
   );
 };
@@ -95,20 +95,4 @@ const Filters = styled.div`
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 10px;
-`;
-
-const Panel = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-
-  padding: 0px;
-  border: none;
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    padding: 20px;
-    border: 1px solid #d9d9d9;
-    border-radius: 5px;
-  }
-
-  box-sizing: border-box;
 `;

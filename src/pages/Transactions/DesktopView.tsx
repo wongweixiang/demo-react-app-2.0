@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import styled from "@emotion/styled";
 import { Table } from "antd";
 import dayjs from "dayjs";
 
@@ -8,7 +7,6 @@ import { updatePage } from "./reducer";
 import { Transaction } from "./types";
 import StatusTag from "./StatusTag";
 import { AppDispatch, RootState } from "../../store";
-import { SCREEN_SIZES } from "../../constants";
 
 const columns = [
   {
@@ -49,7 +47,7 @@ const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
   );
 
   return (
-    <View>
+    <div className="hidden sm:block">
       <Table
         rowKey="id"
         columns={columns}
@@ -57,16 +55,8 @@ const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
         pagination={{ current: currentPage, pageSize }}
         onChange={({ current }) => dispatch(updatePage(current))}
       />
-    </View>
+    </div>
   );
 };
 
 export default DesktopView;
-
-const View = styled.div`
-  display: none;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    display: block;
-  }
-`;

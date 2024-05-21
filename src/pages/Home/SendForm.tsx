@@ -9,12 +9,10 @@ import {
   Modal,
   notification,
 } from "antd";
-import styled from "@emotion/styled";
 
 import { fetchContacts, sendPayment, fetchWallets } from "./reducer";
 import { Wallet } from "./types";
 import { AppDispatch, RootState } from "../../store";
-import { SCREEN_SIZES } from "../../constants";
 
 const { Text } = Typography;
 
@@ -47,11 +45,11 @@ const Send = () => {
   return (
     <>
       <h5>Send Payments</h5>
-      <Panel>
-        <SubPanel style={{ marginBottom: "30px" }}>
+      <div className="flex flex-col sm:flex-row p-5 grey-border">
+        <div className="flex-grow mb-8">
           <Text>Simulate sending a transaction from your wallets!</Text>
-        </SubPanel>
-        <SubPanel>
+        </div>
+        <div className="flex-grow">
           <Form
             form={form}
             layout="vertical"
@@ -78,10 +76,10 @@ const Send = () => {
                 options={wallets.map((w: Wallet) => ({
                   value: w.walletId,
                   label: (
-                    <Option>
+                    <div className="flex flex-col">
                       <b>{w.currency.toUpperCase()}</b>{" "}
                       <span>${w.balance}</span>
-                    </Option>
+                    </div>
                   ),
                 }))}
               />
@@ -96,9 +94,9 @@ const Send = () => {
                 options={contacts.map((c) => ({
                   value: c.id,
                   label: (
-                    <Option>
+                    <div className="flex flex-col">
                       <span>{c.name}</span> <b>{c.email}</b>
-                    </Option>
+                    </div>
                   ),
                 }))}
               />
@@ -147,33 +145,10 @@ const Send = () => {
               Submit
             </Button>
           </Form>
-        </SubPanel>
-      </Panel>
+        </div>
+      </div>
     </>
   );
 };
 
 export default Send;
-
-const Panel = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.MEDIUM}) {
-    flex-direction: row;
-  }
-
-  padding: 20px;
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
-  box-sizing: border-box;
-`;
-
-const SubPanel = styled.div`
-  flex-grow: 1;
-`;
-
-const Option = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
