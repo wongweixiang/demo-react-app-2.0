@@ -17,7 +17,7 @@ import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { addBankAccount, deleteBankAccount, fetchBanks } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
 import { BankAccount } from "./types";
-import SvgMapper from "../../helpers/SvgMapper";
+import SvgMapper from "../../helpers/svgMapper";
 import { SCREEN_SIZES } from "../../constants";
 
 const { Text } = Typography;
