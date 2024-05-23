@@ -8,7 +8,7 @@ const StatusTag = ({ status }: { status: string }) => {
   };
 
   return (
-    <Tag color={colourMapping[status]} style={{ textTransform: "capitalize" }}>
+    <Tag color={colourMapping[status]} className="capitalize">
       {status}
     </Tag>
   );

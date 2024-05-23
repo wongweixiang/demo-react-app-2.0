@@ -3,20 +3,24 @@
 @tailwind utilities;
 
 @layer base {
-  h1, h2, h3, h4, h5 {
-    @apply font-bold
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-bold;
   }
 
   h1 {
-    @apply text-4xl sm:text-5xl my-7
+    @apply text-4xl sm:text-5xl my-7;
   }
 
   h3 {
-    @apply text-xl sm:text-2xl my-5
+    @apply text-xl sm:text-2xl my-5;
   }
 
   h5 {
-    @apply text-lg my-5
+    @apply text-lg my-5;
   }
 }
 
@@ -46,6 +50,20 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.navbar-desktop {
+  transition: left 0.5s ease-out;
+
+  border-right: 1px solid white;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+  @media only screen and (min-width: 640px) {
+    position: static;
+    height: auto;
+    border-right: none;
+    box-shadow: none;
+  }
+}
+
 .card-head {
   .ant-card-head {
     background-color: #001529;
@@ -53,9 +71,9 @@ input[type="number"] {
 }
 
 .no-border {
-  border: none;
+  @apply border-none border border-gray-300 rounded box-border;
 }
 
 .grey-border {
-@apply border-solid border border-gray-300 rounded box-border
+  @apply border-solid border border-gray-300 rounded box-border;
 }

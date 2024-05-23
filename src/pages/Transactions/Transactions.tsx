@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "@emotion/styled";
 import { Select, Input } from "antd";
 
 import DesktopView from "./DesktopView";
@@ -8,7 +7,6 @@ import MobileView from "./MobileView";
 
 import { fetchTransactions } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
-import { SCREEN_SIZES } from "../../constants";
 
 const { Search } = Input;
 
@@ -31,7 +29,7 @@ const Transactions = () => {
     <>
       <h3>Transactions</h3>
       <div className="flex flex-col min-w-[300px] p-0 sm:p-5 no-border sm:grey-border box-border">
-        <Filters>
+        <div className="bg-gray-50 flex flex-col items-stretch md:grid md:grid-cols-3 xl:grid-cols-4 gap-2 rounded p-5 box-border mb-3">
           <Search
             placeholder="Search by transaction ID"
             onSearch={(e) => setTransactionID(e)}
@@ -55,7 +53,7 @@ const Transactions = () => {
               return { value: t, label: t };
             })}
           />
-        </Filters>
+        </div>
         <DesktopView transactions={transactions} />
         <MobileView transactions={transactions} />
       </div>
@@ -73,26 +71,3 @@ const transactionTypes = [
   "Payment Sent",
   "Payment Received",
 ];
-
-const Filters = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media only screen and (min-width: ${SCREEN_SIZES.LARGE}) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 0.5fr;
-  }
-
-  gap: 0.5rem;
-  background-color: #fbfbfb;
-  border-radius: 5px;
-  padding: 20px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-`;

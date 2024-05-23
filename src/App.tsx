@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
 import { MenuOutlined } from "@ant-design/icons";
 import Navigation from "./Navigation";
 import RouteContainer from "./RouteContainer";
-import { SCREEN_SIZES } from "./constants";
 
 function App() {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
@@ -12,20 +10,20 @@ function App() {
   const ref = useOutsideClick(() => setIsNavOpen(false));
 
   return (
-    <AppDiv>
-      <NavRef ref={ref}>
+    <div className="flex">
+      <div className="bg-gray-900" ref={ref}>
         <Navigation isDisplayed={isNavOpen} />
-      </NavRef>
-      <AppBody>
-        <AppHead>
+      </div>
+      <div className="flex flex-col w-full min-h-screen box-border text-[calc(10px + 2vmin)]">
+        <div className="fixed sm:hidden w-full h-14 flex items-center box-border p-5 z-10 bg-gray-900">
           <MenuOutlined
+            className="text-2xl text-white"
             onClick={(e) => setIsNavOpen((prev) => !prev)}
-            style={{ fontSize: "24px", color: "white" }}
           />
-        </AppHead>
+        </div>
         <RouteContainer />
-      </AppBody>
-    </AppDiv>
+      </div>
+    </div>
   );
 }
 
@@ -48,39 +46,5 @@ const useOutsideClick = (callback: () => void) => {
 
   return ref;
 };
-
-const AppDiv = styled.div`
-  display: flex;
-`;
-
-const AppBody = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  font-size: calc(10px + 2vmin);
-`;
-
-const NavRef = styled.div`
-  background-color: #001529;
-`;
-
-const AppHead = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20px;
-  z-index: 5;
-
-  background: #001529;
-  width: 100%;
-  height: 55px;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    display: none;
-  }
-`;
 
 export default App;

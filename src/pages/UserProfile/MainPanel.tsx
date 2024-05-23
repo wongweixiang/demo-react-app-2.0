@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "@emotion/styled";
 import {
   Card,
   Button,
@@ -18,7 +17,6 @@ import { addBankAccount, deleteBankAccount, fetchBanks } from "./reducer";
 import { AppDispatch, RootState } from "../../store";
 import { BankAccount } from "./types";
 import SvgMapper from "../../helpers/svgMapper";
-import { SCREEN_SIZES } from "../../constants";
 
 const { Text } = Typography;
 
@@ -36,7 +34,7 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
   const { banks } = useSelector((state: RootState) => state.userProfile);
 
   return (
-    <Panel>
+    <div className="flex-grow grey-border p-5 min-w-[300px] box-border">
       <h5 className="m-0">Bank Accounts</h5>
       <Tooltip
         title={`You may add a maximum of ${MAX_NUMBER} accounts`}
@@ -50,11 +48,11 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
           Add Account
         </Button>
       </Tooltip>
-      <AccountsContainer>
+      <div className="flex flex-col md:grid md:grid-cols-2 2xl:grid-cols-3 mt-4 h-auto w-full gap-4">
         {bankAccounts.map((a) => (
           <AccountCard key={a.id} account={a} />
         ))}
-      </AccountsContainer>
+      </div>
       <Modal title="Add a bank account" open={isModalOpen} footer={[]}>
         <Form
           form={form}
@@ -76,10 +74,10 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
               options={banks.map((b) => ({
                 value: b.value,
                 label: (
-                  <Option>
+                  <div className="flex justify-between">
                     <SvgMapper bankAbbrev={b.value} width="60px" />
                     <span>{b.label}</span>
-                  </Option>
+                  </div>
                 ),
               }))}
             />
@@ -103,7 +101,7 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
           <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
         </Form>
       </Modal>
-    </Panel>
+    </div>
   );
 };
 
@@ -113,7 +111,7 @@ const AccountCard = ({ account }: { account: BankAccount }) => {
   const { bankAbbrev, id, accountNo, verificationStatus } = account;
   return (
     <Card
-      style={{ flexGrow: 1 }}
+      className="flex-grow"
       title={<SvgMapper bankAbbrev={bankAbbrev} />}
       extra={
         <Button
@@ -129,13 +127,13 @@ const AccountCard = ({ account }: { account: BankAccount }) => {
         </Button>
       }
     >
-      <CardBody>
-        <AccountField>
+      <div className="flex justify-between items-end content-end min-w-40 box-border">
+        <div className="flex flex-col">
           <Text>Account Number</Text>
           <Text strong>{accountNo}</Text>
-        </AccountField>
+        </div>
         <StatusTag status={verificationStatus} />
-      </CardBody>
+      </div>
     </Card>
   );
 };
@@ -147,59 +145,10 @@ const StatusTag = ({ status }: { status: string }) => {
   };
 
   return (
-    <Tag color={colourMapping[status]} style={{ textTransform: "capitalize" }}>
+    <Tag color={colourMapping[status]} className="capitalize">
       {status}
     </Tag>
   );
 };
 
 export default MainPanel;
-
-const Panel = styled.div`
-  flex-grow: 1;
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
-  padding: 20px;
-
-  min-width: 300px;
-  box-sizing: border-box;
-`;
-
-const AccountsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media only screen and (min-width: ${SCREEN_SIZES.EXTRA_LARGE}) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  margin-top: 15px;
-  height: auto;
-  width: 100%;
-  gap: 1rem;
-`;
-
-const CardBody = styled.div`
-  display: flex;
-  min-width: 160px;
-  box-sizing: border-box;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-content: flex-end;
-`;
-
-const AccountField = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Option = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

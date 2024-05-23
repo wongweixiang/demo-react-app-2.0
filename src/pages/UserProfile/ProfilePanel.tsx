@@ -31,7 +31,7 @@ const ProfileField = ({ label, field }: { label: string; field: string }) => {
   return (
     <>
       <Text strong>{label}</Text>
-      <Text style={{ marginBottom: "20px" }}>{field}</Text>
+      <Text className="mb-5">{field}</Text>
     </>
   );
 };

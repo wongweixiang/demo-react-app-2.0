@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import styled from "@emotion/styled";
 import {
   HomeOutlined,
   InteractionOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu, Space } from "antd";
-import { PATHS, SCREEN_SIZES } from "./constants";
+import { PATHS } from "./constants";
 
 const items = [
   {
@@ -40,55 +39,22 @@ const items = [
 
 const Navigation = ({ isDisplayed }: { isDisplayed: boolean }) => {
   return (
-    <Wrapper isDisplayed={isDisplayed}>
-      <Logo>QuickPay</Logo>
+    <div
+      className={`block fixed h-full min-w-64 bg-gray-900 navbar-desktop ${
+        isDisplayed ? "left-0" : "-left-64"
+      } z-20`}
+    >
+      <div className="h-24 font-bold text-2xl text-sky-400 text-center italic box-border select-none p-8">
+        QuickPay
+      </div>
       <Menu
-        style={{ width: "100%", height: "100%" }}
+        className="w-full h-full"
         theme="dark"
         mode="inline"
         items={items}
       />
-    </Wrapper>
+    </div>
   );
 };
-
-type WrapperProps = {
-  isDisplayed: boolean;
-};
-
-const Wrapper = styled.div`
-  display: block;
-  position: fixed;
-  left: ${(props: WrapperProps) => (props.isDisplayed ? "0px" : "-251px")};
-  transition: left 0.5s ease-out;
-
-  height: 100%;
-  border-right: 1px solid white;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-
-  @media only screen and (min-width: ${SCREEN_SIZES.SMALL}) {
-    display: block;
-    position: static;
-    height: auto;
-    border-right: none;
-    box-shadow: none;
-  }
-
-  min-width: 250px;
-  z-index: 10;
-`;
-
-const Logo = styled.div`
-  font-size: 23px;
-  font-weight: 700;
-  font-style: italic;
-  height: 100px;
-  box-sizing: border-box;
-  padding: 35px;
-  text-align: center;
-  color: #1aa3ff;
-  background-color: #001529;
-  user-select: none;
-`;
 
 export default Navigation;

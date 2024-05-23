@@ -19,7 +19,7 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
   const transactionsOnCurrentPage = transactions.slice(startIndex, endIndex);
 
   return (
-    <div className="flex flex-col gap-4 sm:hidden">
+    <div className="flex flex-col gap-4 md:hidden">
       {transactionsOnCurrentPage.map((t: Transaction) => {
         const { id, status, amount, type, createdAt } = t;
         const { direction, currency, netAmount } = amount;
@@ -32,7 +32,7 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
             }
             extra={<StatusTag status={status} />}
           >
-            <div className="flex justify-center content-end items-end box-border">
+            <div className="flex justify-between content-end items-end box-border">
               <div>
                 <b>{type}</b>
                 <div>ID: {id}</div>

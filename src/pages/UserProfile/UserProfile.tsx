@@ -19,7 +19,7 @@ const UserProfile = () => {
   return (
     <>
       <h3>User Profile</h3>
-      <div className="flex flex-col sm:flex-row h-full w-full mb-3 gap-4">
+      <div className="flex flex-col lg:flex-row h-full w-full mb-3 gap-4">
         <ProfilePanel
           profileImgUrl={profileImgUrl}
           fullName={fullName}

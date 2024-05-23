@@ -25,21 +25,21 @@ const Home = () => {
       <h1>Hello, {fullName}!</h1>
 
       <h3>My Wallets</h3>
-      <div className="flex flex-col sm:flex-row w-full h-auto gap-4">
+      <div className="flex flex-col md:flex-row w-full h-auto gap-4">
         {wallets.map((w: Wallet) => (
           <Card
             className="flex-grow border-gray-300 card-head"
             key={w.walletId}
             title={
               <div className="flex items-center text-sky-300 text-2xl font-bold uppercase gap-2">
-                <DollarTwoTone style={{ fontSize: "24px" }} />
+                <DollarTwoTone className="text-xl" />
                 {w.currency}
               </div>
             }
           >
             <div className="flex justify-between">
               <b>Balance:</b>
-              <b style={{ fontSize: "32px" }}>${w.balance}</b>
+              <b className="text-3xl">${w.balance}</b>
             </div>
           </Card>
         ))}

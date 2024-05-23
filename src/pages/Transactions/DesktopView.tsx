@@ -47,7 +47,7 @@ const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
   );
 
   return (
-    <div className="hidden sm:block">
+    <div className="hidden md:block">
       <Table
         rowKey="id"
         columns={columns}

@@ -45,7 +45,7 @@ const Send = () => {
   return (
     <>
       <h5>Send Payments</h5>
-      <div className="flex flex-col sm:flex-row p-5 grey-border">
+      <div className="flex flex-col md:flex-row p-5 grey-border">
         <div className="flex-grow mb-8">
           <Text>Simulate sending a transaction from your wallets!</Text>
         </div>
