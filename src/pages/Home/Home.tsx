@@ -21,14 +21,14 @@ const Home = () => {
   const { fullName } = useSelector((state: RootState) => state.userProfile);
 
   return (
-    <>
+    <div className="max-w-[80rem]">
       <h1>Hello, {fullName}!</h1>
 
       <h3>My Wallets</h3>
       <div className="flex flex-col md:flex-row w-full h-auto gap-4">
         {wallets.map((w: Wallet) => (
           <Card
-            className="flex-grow border-gray-300 card-head"
+            className="h-48 flex-grow border-gray-300 card-head"
             key={w.walletId}
             title={
               <div className="flex items-center text-sky-300 text-2xl font-bold uppercase gap-2">
@@ -45,7 +45,7 @@ const Home = () => {
         ))}
       </div>
       <SendForm />
-    </>
+    </div>
   );
 };
 
