@@ -8,8 +8,8 @@ import store from "./store";
 import reportWebVitals from "./reportWebVitals";
 
 async function main() {
-  if (window.location.pathname === "/demo-react-app") {
-    window.location.pathname = "/demo-react-app/";
+  if (window.location.pathname === "/demo-react-app-2.0") {
+    window.location.pathname = "/demo-react-app-2.0/";
   }
 
   // wallet balances are loaded into sessionStorage, so they will persist across refreshes
@@ -24,7 +24,7 @@ async function main() {
   const { worker } = require("./mocks/browser");
   await worker.start({
     serviceWorker: {
-      url: "/demo-react-app/mockServiceWorker.js",
+      url: "/demo-react-app-2.0/mockServiceWorker.js",
     },
   });
 
