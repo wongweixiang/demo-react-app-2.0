@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
   Button,
@@ -13,25 +11,21 @@ import {
 } from "antd";
 import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
-import { addBankAccount, deleteBankAccount, fetchBanks } from "./reducer";
-import { AppDispatch, RootState } from "../../store";
 import { BankAccount } from "./types";
 import SvgMapper from "../../helpers/svgMapper";
+import { useBanks } from "./useBanks";
+import { useModalState } from "./useModalState";
 
 const { Text } = Typography;
 
 const MAX_NUMBER = 5;
 
 const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [form] = Form.useForm();
+  const { banks, form, handleAddBankAccount, handleDeleteBankAccount } =
+    useBanks();
 
-  useEffect(() => {
-    dispatch(fetchBanks());
-  }, []);
-
-  const { banks } = useSelector((state: RootState) => state.userProfile);
+  const { isModalOpen, handleModalOpening, handleModalClosing } =
+    useModalState();
 
   return (
     <div className="flex-grow grey-border p-5 min-w-[300px] box-border">
@@ -42,7 +36,7 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
       >
         <Button
           disabled={bankAccounts.length >= MAX_NUMBER}
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleModalOpening}
         >
           <PlusCircleOutlined />
           Add Account
@@ -50,19 +44,23 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
       </Tooltip>
       <div className="flex flex-col md:grid md:grid-cols-2 2xl:grid-cols-3 mt-4 h-auto w-full gap-4">
         {bankAccounts.map((a) => (
-          <AccountCard key={a.id} account={a} />
+          <AccountCard
+            key={a.id}
+            account={a}
+            handleDeleteBankAccount={handleDeleteBankAccount}
+          />
         ))}
       </div>
-      <Modal title="Add a bank account" open={isModalOpen} footer={[]}>
+      <Modal
+        title="Add a bank account"
+        open={isModalOpen}
+        footer={[]}
+        closable={false}
+      >
         <Form
           form={form}
           layout="vertical"
-          onFinish={(values) => {
-            dispatch(addBankAccount(values)).then(() => {
-              setIsModalOpen(false);
-              form.resetFields();
-            });
-          }}
+          onFinish={(values) => handleAddBankAccount(values)}
         >
           <Form.Item
             label="Bank Name"
@@ -97,17 +95,23 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
           </Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
-          </Button>{" "}
-          <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+          </Button>
+          <Button className="ml-3" onClick={handleModalClosing}>
+            Cancel
+          </Button>
         </Form>
       </Modal>
     </div>
   );
 };
 
-const AccountCard = ({ account }: { account: BankAccount }) => {
-  const dispatch: AppDispatch = useDispatch();
-
+const AccountCard = ({
+  account,
+  handleDeleteBankAccount,
+}: {
+  account: BankAccount;
+  handleDeleteBankAccount: (id: number) => void;
+}) => {
   const { bankAbbrev, id, accountNo, verificationStatus } = account;
   return (
     <Card
@@ -119,7 +123,7 @@ const AccountCard = ({ account }: { account: BankAccount }) => {
             Modal.confirm({
               title: "Confirm deletion",
               content: "Are you sure you wish to delete this bank account?",
-              onOk: () => dispatch(deleteBankAccount({ id })),
+              onOk: () => handleDeleteBankAccount(id),
             })
           }
         >

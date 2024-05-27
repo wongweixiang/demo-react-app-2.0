@@ -1,20 +1,11 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ProfilePanel from "./ProfilePanel";
 import MainPanel from "./MainPanel";
 
-import { fetchUserProfile } from "./reducer";
-import { AppDispatch, RootState } from "../../store";
+import { useUserProfile } from "./useUserProfile";
 
 const UserProfile = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { fullName, email, phoneNo, profileImgUrl, bankAccounts } = useSelector(
-    (state: RootState) => state.userProfile
-  );
-
-  useEffect(() => {
-    if (!fullName) dispatch(fetchUserProfile());
-  }, []);
+  const { fullName, email, phoneNo, profileImgUrl, bankAccounts } =
+    useUserProfile();
 
   return (
     <>
