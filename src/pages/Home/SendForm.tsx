@@ -1,49 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Form,
-  Select,
-  Input,
-  Button,
-  Typography,
-  Modal,
-  notification,
-} from "antd";
+import { Form, Select, Input, Button, Typography, Modal } from "antd";
 
-import { fetchContacts, sendPayment, fetchWallets } from "./reducer";
 import { Wallet } from "./types";
-import { AppDispatch, RootState } from "../../store";
 import { useWallets } from "../../hooks/useWallets";
+import { useSendPayment } from "../../hooks/useSendPayment";
 
 const { Text } = Typography;
 
 const Send = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const [form] = Form.useForm();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, []);
-
   const { wallets } = useWallets();
 
-  const { contacts } = useSelector((state: RootState) => state.home);
-
-  const openNotification = (payload: {
-    message: string;
-    details: Record<string, unknown>;
-  }) => {
-    const { message, details } = payload;
-    const targetWallet = wallets.find((w) => w.walletId === details.walletId);
-
-    notification.open({
-      message: <b>{message}</b>,
-      description: `${targetWallet?.currency.toUpperCase()}$${
-        details.amount
-      } has been sent`,
-      duration: 2,
-    });
-  };
+  const { form, contacts, handleSendPayment } = useSendPayment();
 
   return (
     <>
@@ -60,12 +26,7 @@ const Send = () => {
               Modal.confirm({
                 title: "Confirm payment",
                 content: "This payment will be mocked (using browser cache)",
-                onOk: () =>
-                  dispatch(sendPayment(values)).then(({ payload }) => {
-                    openNotification(payload);
-                    form.resetFields();
-                    dispatch(fetchWallets());
-                  }),
+                onOk: () => handleSendPayment(values),
               });
             }}
           >
