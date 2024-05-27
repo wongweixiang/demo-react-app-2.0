@@ -5,6 +5,8 @@ export const getTransactionsResolver = (req, res, ctx) => {
 
   let filteredTransactions = mockTransactions;
 
+  console.log({ transactionType });
+
   if (transactionID.length) {
     filteredTransactions = filteredTransactions.filter((t) =>
       t.id.toLowerCase().includes(transactionID)
@@ -72,7 +74,7 @@ const mockTransactions = [
     status: "cancelled",
   },
   {
-    id: "x202387000",
+    id: "x202389000",
     created_at: "2022-10-20T18:45:18.000Z",
     type: "Bank Transfer In",
     amount: {
@@ -116,7 +118,7 @@ const mockTransactions = [
     status: "completed",
   },
   {
-    id: "x202387000",
+    id: "x202397000",
     created_at: "2022-10-02T18:45:18.000Z",
     type: "Bank Transfer In",
     amount: {
@@ -127,7 +129,7 @@ const mockTransactions = [
     status: "expired",
   },
   {
-    id: "x202387000",
+    id: "x202367000",
     created_at: "2022-09-18T17:05:18.000Z",
     type: "Bank Transfer In",
     amount: {
@@ -138,7 +140,7 @@ const mockTransactions = [
     status: "expired",
   },
   {
-    id: "x202387000",
+    id: "x202487000",
     created_at: "2022-09-12T10:12:18.000Z",
     type: "Bank Transfer In",
     amount: {
@@ -149,7 +151,7 @@ const mockTransactions = [
     status: "completed",
   },
   {
-    id: "x202387000",
+    id: "x202587000",
     created_at: "2022-09-08T15:53:18.000Z",
     type: "Bank Transfer In",
     amount: {

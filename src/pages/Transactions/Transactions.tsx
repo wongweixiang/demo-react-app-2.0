@@ -1,29 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Select, Input } from "antd";
 
 import DesktopView from "./DesktopView";
 import MobileView from "./MobileView";
 
-import { fetchTransactions } from "./reducer";
-import { AppDispatch, RootState } from "../../store";
+import { useTransactions } from "./useTransactions";
 
 const { Search } = Input;
 
 const Transactions = () => {
-  const dispatch: AppDispatch = useDispatch();
-
-  const [transactionID, setTransactionID] = useState("");
-  const [status, setStatus] = useState([]);
-  const [transactionType, setTransactionType] = useState([]);
-
-  useEffect(() => {
-    dispatch(fetchTransactions({ transactionID, status, transactionType }));
-  }, [transactionID, status, transactionType]);
-
-  const { transactions } = useSelector(
-    (state: RootState) => state.transactions
-  );
+  const { transactions, setTransactionID, setStatus, setTransactionType } =
+    useTransactions();
 
   return (
     <>
