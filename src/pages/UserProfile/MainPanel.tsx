@@ -13,8 +13,8 @@ import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 import { BankAccount } from "./types";
 import SvgMapper from "../../helpers/svgMapper";
-import { useBanks } from "./useBanks";
-import { useModalState } from "./useModalState";
+import { useBanks } from "../../hooks/useBanks";
+import { useModalState } from "../../hooks/useModalState";
 
 const { Text } = Typography;
 

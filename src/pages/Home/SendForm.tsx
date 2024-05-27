@@ -13,6 +13,7 @@ import {
 import { fetchContacts, sendPayment, fetchWallets } from "./reducer";
 import { Wallet } from "./types";
 import { AppDispatch, RootState } from "../../store";
+import { useWallets } from "../../hooks/useWallets";
 
 const { Text } = Typography;
 
@@ -24,7 +25,9 @@ const Send = () => {
     dispatch(fetchContacts());
   }, []);
 
-  const { wallets, contacts } = useSelector((state: RootState) => state.home);
+  const { wallets } = useWallets();
+
+  const { contacts } = useSelector((state: RootState) => state.home);
 
   const openNotification = (payload: {
     message: string;

@@ -1,24 +1,15 @@
-import { useEffect } from "react";
 import { Card } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { DollarTwoTone } from "@ant-design/icons";
 
 import SendForm from "./SendForm";
-import { fetchWallets } from "./reducer";
-import { fetchUserProfile } from "../UserProfile/reducer";
 import { Wallet } from "./types";
-import { AppDispatch, RootState } from "../../store";
+import { useUserProfile } from "../../hooks/useUserProfile";
+import { useWallets } from "../../hooks/useWallets";
 
 const Home = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const { fullName } = useUserProfile();
 
-  useEffect(() => {
-    dispatch(fetchUserProfile());
-    dispatch(fetchWallets());
-  }, []);
-
-  const { wallets } = useSelector((state: RootState) => state.home);
-  const { fullName } = useSelector((state: RootState) => state.userProfile);
+  const { wallets } = useWallets();
 
   return (
     <div className="max-w-[80rem]">

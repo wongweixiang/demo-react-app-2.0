@@ -3,7 +3,7 @@ import { Select, Input } from "antd";
 import DesktopView from "./DesktopView";
 import MobileView from "./MobileView";
 
-import { useTransactions } from "./useTransactions";
+import { useTransactions } from "../../hooks/useTransactions";
 
 const { Search } = Input;
 

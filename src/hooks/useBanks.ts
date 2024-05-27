@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "antd";
 
-import { fetchBanks, addBankAccount, deleteBankAccount } from "./reducer";
-import { AppDispatch, RootState } from "../../store";
+import {
+  fetchBanks,
+  addBankAccount,
+  deleteBankAccount,
+} from "../pages/UserProfile/reducer";
+import { AppDispatch, RootState } from "../store";
 import { useModalState } from "./useModalState";
 
 export const useBanks = () => {

@@ -1,7 +1,7 @@
 import ProfilePanel from "./ProfilePanel";
 import MainPanel from "./MainPanel";
 
-import { useUserProfile } from "./useUserProfile";
+import { useUserProfile } from "../../hooks/useUserProfile";
 
 const UserProfile = () => {
   const { fullName, email, phoneNo, profileImgUrl, bankAccounts } =

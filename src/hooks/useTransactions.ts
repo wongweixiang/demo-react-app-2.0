@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTransactions } from "./reducer";
-import { AppDispatch, RootState } from "../../store";
+import { fetchTransactions } from "../pages/Transactions/reducer";
+import { AppDispatch, RootState } from "../store";
 
 export const useTransactions = () => {
   const dispatch: AppDispatch = useDispatch();

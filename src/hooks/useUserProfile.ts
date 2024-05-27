@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchUserProfile } from "./reducer";
-import { AppDispatch, RootState } from "../../store";
+import { fetchUserProfile } from "../pages/UserProfile/reducer";
+import { AppDispatch, RootState } from "../store";
 
 export const useUserProfile = () => {
   const dispatch: AppDispatch = useDispatch();
