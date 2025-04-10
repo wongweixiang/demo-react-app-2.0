@@ -81,6 +81,10 @@ input {
   @apply text-gray-900 dark:text-gray-100;
 }
 
+.ant-switch-inner {
+  @apply bg-gray-600
+}
+
 .test {
   @apply text-red-600;
 }
