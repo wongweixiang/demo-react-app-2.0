@@ -13,7 +13,7 @@ export const useTransactions = () => {
 
   useEffect(() => {
     dispatch(fetchTransactions({ transactionID, status, transactionType }));
-  }, [transactionID, status, transactionType]);
+  }, [transactionID, status, transactionType, dispatch]);
 
   const { transactions } = useSelector(
     (state: RootState) => state.transactions

@@ -16,7 +16,7 @@ export const useSendPayment = () => {
 
   useEffect(() => {
     dispatch(fetchContacts());
-  }, []);
+  }, [dispatch]);
 
   const { contacts } = useSelector((state: RootState) => state.home);
   const { wallets } = useWallets();

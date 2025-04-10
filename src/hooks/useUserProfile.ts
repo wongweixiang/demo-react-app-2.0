@@ -12,7 +12,7 @@ export const useUserProfile = () => {
 
   useEffect(() => {
     if (!fullName) dispatch(fetchUserProfile());
-  }, []);
+  }, [fullName, dispatch]);
 
   return { fullName, email, phoneNo, profileImgUrl, bankAccounts };
 };

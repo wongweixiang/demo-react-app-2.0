@@ -9,7 +9,7 @@ export const useWallets = () => {
 
   useEffect(() => {
     dispatch(fetchWallets());
-  }, []);
+  }, [dispatch]);
 
   const { wallets } = useSelector((state: RootState) => state.home);
 

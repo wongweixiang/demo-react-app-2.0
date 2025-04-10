@@ -19,7 +19,7 @@ export const useBanks = () => {
 
   useEffect(() => {
     dispatch(fetchBanks());
-  }, []);
+  }, [dispatch]);
 
   const handleAddBankAccount = (values: {
     accountNo: string;
