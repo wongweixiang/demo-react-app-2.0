@@ -1,7 +1,3 @@
-import { Typography } from "antd";
-
-const { Text } = Typography;
-
 const ProfilePanel = ({
   fullName,
   email,
@@ -35,8 +31,8 @@ const ProfilePanel = ({
 const ProfileField = ({ label, field }: { label: string; field: string }) => {
   return (
     <>
-      <Text strong>{label}</Text>
-      <Text className="mb-5">{field}</Text>
+      <span className="font-semibold">{label}</span>
+      <span className="mb-5">{field}</span>
     </>
   );
 };

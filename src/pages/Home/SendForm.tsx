@@ -1,10 +1,8 @@
-import { Form, Select, Input, Button, Typography, Modal } from "antd";
+import { Form, Select, Input, Button, Modal } from "antd";
 
 import { Wallet } from "./types";
 import { useWallets } from "../../hooks/useWallets";
 import { useSendPayment } from "../../hooks/useSendPayment";
-
-const { Text } = Typography;
 
 const Send = () => {
   const { wallets } = useWallets();
@@ -16,7 +14,7 @@ const Send = () => {
       <h5>Send Payments</h5>
       <div className="flex flex-col md:flex-row p-5 grey-border">
         <div className="flex-grow mb-8">
-          <Text>Simulate sending a transaction from your wallets!</Text>
+          <span>Simulate sending a transaction from your wallets!</span>
         </div>
         <div className="flex-grow">
           <Form

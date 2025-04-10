@@ -19,10 +19,10 @@ const Home = () => {
       <div className="flex flex-col md:flex-row w-full h-auto gap-4">
         {wallets.map((w: Wallet) => (
           <Card
-            className="h-48 flex-grow border-gray-300 card-head"
+            className="h-48 flex-grow border-gray-300 card-head theme"
             key={w.walletId}
             title={
-              <div className="flex items-center text-sky-300 text-2xl font-bold uppercase gap-2">
+              <div className="flex items-center text-2xl font-bold uppercase gap-2">
                 <DollarTwoTone className="text-xl" />
                 {w.currency}
               </div>

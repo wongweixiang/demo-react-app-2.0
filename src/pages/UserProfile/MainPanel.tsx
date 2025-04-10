@@ -1,22 +1,10 @@
-import {
-  Card,
-  Button,
-  Typography,
-  Tag,
-  Modal,
-  Form,
-  Tooltip,
-  Input,
-  Select,
-} from "antd";
+import { Card, Button, Tag, Modal, Form, Tooltip, Input, Select } from "antd";
 import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 import { BankAccount } from "./types";
 import SvgMapper from "../../helpers/svgMapper";
 import { useBanks } from "../../hooks/useBanks";
 import { useModalState } from "../../hooks/useModalState";
-
-const { Text } = Typography;
 
 const MAX_NUMBER = 5;
 
@@ -35,11 +23,12 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
         placement="bottomLeft"
       >
         <Button
+          className="flex items-center bg-gray-100 dark:bg-gray-900 mt-2"
           disabled={bankAccounts.length >= MAX_NUMBER}
           onClick={handleModalOpening}
         >
           <PlusCircleOutlined />
-          Add Account
+          <span className="theme">Add Account</span>
         </Button>
       </Tooltip>
       <div className="flex flex-col md:grid md:grid-cols-2 2xl:grid-cols-3 mt-4 h-auto w-full gap-4">
@@ -58,6 +47,7 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
         closable={false}
       >
         <Form
+          className="theme"
           form={form}
           layout="vertical"
           onFinish={(values) => handleAddBankAccount(values)}
@@ -115,10 +105,11 @@ const AccountCard = ({
   const { bankAbbrev, id, accountNo, verificationStatus } = account;
   return (
     <Card
-      className="flex-grow"
+      className="flex-grow theme card-head"
       title={<SvgMapper bankAbbrev={bankAbbrev} />}
       extra={
         <Button
+          className="flex items-center"
           onClick={() =>
             Modal.confirm({
               title: "Confirm deletion",
@@ -133,8 +124,8 @@ const AccountCard = ({
     >
       <div className="flex justify-between items-end content-end min-w-40 box-border">
         <div className="flex flex-col">
-          <Text>Account Number</Text>
-          <Text strong>{accountNo}</Text>
+          <span>Account Number</span>
+          <span className="font-medium">{accountNo}</span>
         </div>
         <StatusTag status={verificationStatus} />
       </div>

@@ -15,7 +15,7 @@ const Transactions = () => {
     <>
       <h3>Transactions</h3>
       <div className="flex flex-col min-w-[300px] p-0 sm:p-5 no-border sm:grey-border box-border">
-        <div className="bg-gray-50 flex flex-col items-stretch md:grid md:grid-cols-3 xl:grid-cols-4 gap-2 rounded p-5 box-border mb-3">
+        <div className="bg-gray-50 dark:bg-gray-800 flex flex-col items-stretch md:grid md:grid-cols-3 xl:grid-cols-4 gap-2 rounded p-5 box-border mb-3">
           <Search
             placeholder="Search by transaction ID"
             onSearch={(e) => setTransactionID(e)}
