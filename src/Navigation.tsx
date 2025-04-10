@@ -6,6 +6,8 @@ import {
 } from "@ant-design/icons";
 import { Menu, Space } from "antd";
 import { PATHS } from "./constants";
+import clsx from "clsx";
+import { Toggle } from "./Toggle";
 
 const items = [
   {
@@ -40,13 +42,15 @@ const items = [
 const Navigation = ({ isDisplayed }: { isDisplayed: boolean }) => {
   return (
     <div
-      className={`block fixed h-full min-w-64 bg-gray-900 navbar-desktop ${
+      className={clsx(
+        `block fixed h-full min-w-64 bg-gray-900 navbar-desktop z-20`,
         isDisplayed ? "left-0" : "-left-64"
-      } z-20`}
+      )}
     >
       <div className="h-24 font-bold text-2xl text-sky-400 text-center italic box-border select-none p-8">
         QuickPay
       </div>
+      <Toggle />
       <Menu
         className="w-full h-full"
         theme="dark"
