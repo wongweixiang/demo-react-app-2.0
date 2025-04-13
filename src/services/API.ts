@@ -1,11 +1,25 @@
+import { createSearchParams } from "react-router-dom";
+
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const API = {
-  get: async (endpoint: string) => {
+  get: async (
+    endpoint: string,
+    options?: {
+      searchParams?: URLSearchParams | any;
+    }
+  ) => {
+    const { searchParams } = options || {};
+
     let response;
 
     try {
-      response = await fetch(baseUrl + endpoint, {
+      const params =
+        searchParams && Object.keys(searchParams).length > 0
+          ? "?" + createSearchParams(searchParams).toString()
+          : "";
+
+      response = await fetch(baseUrl + endpoint + params, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

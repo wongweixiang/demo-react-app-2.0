@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import transactionsReducer from "./pages/Transactions/reducer";
 import userProfileReducer from "./pages/UserProfile/reducer";
 
 const store = configureStore({
   reducer: {
-    transactions: transactionsReducer,
     userProfile: userProfileReducer,
   },
 });

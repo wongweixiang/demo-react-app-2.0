@@ -1,12 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-
 import { Table } from "antd";
 import dayjs from "dayjs";
 
-import { updatePage } from "./reducer";
-import { Transaction } from "./types";
+import { Transaction } from "../../services/fetchTransactions";
 import StatusTag from "./StatusTag";
-import { AppDispatch, RootState } from "../../store";
+import { usePagination } from "../../hooks/usePagination";
 
 const columns = [
   {
@@ -41,10 +38,7 @@ const columns = [
 ];
 
 const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const { currentPage, pageSize } = useSelector(
-    (state: RootState) => state.transactions.pagination
-  );
+  const { currentPage, pageSize, setCurrentPage } = usePagination();
 
   return (
     <div className="hidden md:block">
@@ -53,7 +47,7 @@ const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
         columns={columns}
         dataSource={transactions}
         pagination={{ current: currentPage, pageSize }}
-        onChange={({ current }) => dispatch(updatePage(current))}
+        onChange={({ current }) => setCurrentPage(current)}
       />
     </div>
   );

@@ -1,13 +1,9 @@
-import { useDispatch } from "react-redux";
 import { Form, notification } from "antd";
 
-import { AppDispatch } from "../store";
 import { useWallets } from "./useWallets";
-// import { sendPayment } from "../pages/Home/reducer";
 import { sendPayment } from "../services/sendPayment";
 
 export const useSendPayment = () => {
-  const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
 
   const { wallets, refetch: refetchWallets } = useWallets();

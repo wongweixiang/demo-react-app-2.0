@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
-import { fetchTransactions } from "../pages/Transactions/reducer";
-import { AppDispatch, RootState } from "../store";
+import { fetchTransactions } from "../services/fetchTransactions";
+import { useQuery } from "@tanstack/react-query";
 
 export const useTransactions = () => {
-  const dispatch: AppDispatch = useDispatch();
-
   const [transactionID, setTransactionID] = useState("");
   const [status, setStatus] = useState([]);
   const [transactionType, setTransactionType] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchTransactions({ transactionID, status, transactionType }));
-  }, [transactionID, status, transactionType, dispatch]);
-
-  const { transactions } = useSelector(
-    (state: RootState) => state.transactions
-  );
+  const { data } = useQuery({
+    queryKey: ["transactions", transactionID, status, transactionType],
+    queryFn: async () => {
+      return await fetchTransactions({
+        transactionID,
+        status,
+        transactionType,
+      });
+    },
+  });
 
   return {
-    transactions,
+    transactions: data ?? [],
     setTransactionID,
     setStatus,
     setTransactionType,
