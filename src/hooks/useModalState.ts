@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useModalState = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
-  const handleModalOpening = () => setIsOpen(true);
-  const handleModalClosing = () => setIsOpen(false);
+  const { data } = useQuery({ queryKey: ["modalState"], initialData: false });
+
+  const handleModalOpening = () => {
+    queryClient.setQueryData(["modalState"], true);
+  };
+
+  const handleModalClosing = () => {
+    queryClient.setQueryData(["modalState"], false);
+  };
 
   return {
-    isModalOpen: isOpen,
+    isModalOpen: data,
     handleModalOpening,
     handleModalClosing,
   };

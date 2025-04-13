@@ -52,6 +52,24 @@ const API = {
       throw new Error("Network error");
     }
   },
+  delete: async (endpoint: string) => {
+    let response;
+
+    try {
+      response = await fetch(baseUrl + endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error deleting data:", error);
+      throw new Error("Network error");
+    }
+  },
 };
 
 export default API;
