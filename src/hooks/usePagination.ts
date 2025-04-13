@@ -5,7 +5,7 @@ export const usePagination = () => {
 
   const { data } = useQuery({
     queryKey: ["pagination"],
-    initialData: { currentPage: 1, pageSize: 5 },
+    initialData: { currentPage: 1, pageSize: 10 },
   });
 
   const setCurrentPage = (current: number | undefined) => {
