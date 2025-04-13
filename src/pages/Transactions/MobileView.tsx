@@ -1,20 +1,13 @@
-import { Pagination, Card } from "antd";
+import { Card } from "antd";
 import dayjs from "dayjs";
 
 import StatusTag from "./StatusTag";
 import { Transaction } from "../../services/fetchTransactions";
-import { usePagination } from "../../hooks/usePagination";
 
 const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
-  const { currentPage, pageSize, setCurrentPage } = usePagination();
-
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = currentPage * pageSize;
-  const transactionsOnCurrentPage = transactions.slice(startIndex, endIndex);
-
   return (
     <div className="flex flex-col gap-4 md:hidden">
-      {transactionsOnCurrentPage.map((t: Transaction) => {
+      {transactions.map((t: Transaction) => {
         const { id, status, amount, type, createdAt } = t;
         const { direction, currency, netAmount } = amount;
 
@@ -36,12 +29,6 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
           </Card>
         );
       })}
-      <Pagination
-        current={currentPage}
-        pageSize={pageSize}
-        total={transactions.length}
-        onChange={(page) => setCurrentPage(page)}
-      />
     </div>
   );
 };

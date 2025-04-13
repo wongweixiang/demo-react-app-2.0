@@ -24,13 +24,27 @@ type FetchTransactionsParams = {
   transactionID: string;
   status: Array<Status>;
   transactionType: Array<TransactionType>;
+  page: number;
+  limit: number;
 };
 
-type FetchTransactionsResponse = Array<Transaction>;
+type FetchTransactionsResponse = {
+  data: Array<Transaction>;
+  pagination?: {
+    page: number;
+    limit: number;
+    total: number;
+  };
+};
 
 export const fetchTransactions = async (
   params: FetchTransactionsParams
 ): Promise<FetchTransactionsResponse> => {
-  console.log("params", params);
-  return await API.get("/transactions", { searchParams: params });
+  const searchParams = {
+    ...params,
+    page: String(params.page),
+    limit: String(params.limit),
+  };
+
+  return await API.get("/transactions", { searchParams });
 };

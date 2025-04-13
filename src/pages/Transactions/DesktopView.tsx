@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 
 import { Transaction } from "../../services/fetchTransactions";
 import StatusTag from "./StatusTag";
-import { usePagination } from "../../hooks/usePagination";
 
 const columns = [
   {
@@ -38,16 +37,13 @@ const columns = [
 ];
 
 const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
-  const { currentPage, pageSize, setCurrentPage } = usePagination();
-
   return (
     <div className="hidden md:block">
       <Table
         rowKey="id"
         columns={columns}
         dataSource={transactions}
-        pagination={{ current: currentPage, pageSize }}
-        onChange={({ current }) => setCurrentPage(current)}
+        pagination={false}
       />
     </div>
   );
