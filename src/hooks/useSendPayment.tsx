@@ -1,25 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Form, notification } from "antd";
 
-import {
-  fetchContacts,
-  sendPayment,
-  fetchWallets,
-} from "../pages/Home/reducer";
-import { AppDispatch, RootState } from "../store";
+import { AppDispatch } from "../store";
 import { useWallets } from "./useWallets";
+// import { sendPayment } from "../pages/Home/reducer";
+import { sendPayment } from "../services/sendPayment";
 
 export const useSendPayment = () => {
   const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  const { contacts } = useSelector((state: RootState) => state.home);
-  const { wallets } = useWallets();
+  const { wallets, refetch: refetchWallets } = useWallets();
 
   const openNotification = (payload: {
     message: string;
@@ -37,20 +28,20 @@ export const useSendPayment = () => {
     });
   };
 
-  const handleSendPayment = (values: {
+  const handleSendPayment = async (values: {
     recipientId: number;
     walletId: number;
     amount: string;
-  }) =>
-    dispatch(sendPayment(values)).then(({ payload }) => {
-      openNotification(payload);
-      form.resetFields();
-      dispatch(fetchWallets());
-    });
+  }) => {
+    const payload = await sendPayment(values);
+
+    openNotification(payload);
+    form.resetFields();
+    refetchWallets();
+  };
 
   return {
     form,
-    contacts,
     openNotification,
     handleSendPayment,
   };

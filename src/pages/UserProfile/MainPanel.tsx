@@ -105,7 +105,7 @@ const AccountCard = ({
   const { bankAbbrev, id, accountNo, verificationStatus } = account;
   return (
     <Card
-      className="flex-grow theme card-head"
+      className="flex-grow theme card-head-grey"
       title={<SvgMapper bankAbbrev={bankAbbrev} />}
       extra={
         <Button

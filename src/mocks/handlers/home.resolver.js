@@ -3,12 +3,12 @@ export const getWalletsResolver = (req, res, ctx) => {
     ctx.status(200),
     ctx.json([
       {
-        wallet_id: 1,
+        walletId: 1,
         currency: "sgd",
         balance: sessionStorage.getItem("wallet_1_balance"),
       },
       {
-        wallet_id: 2,
+        walletId: 2,
         currency: "usd",
         balance: sessionStorage.getItem("wallet_2_balance"),
       },
@@ -45,17 +45,17 @@ export const getContactsResolver = (req, res, ctx) => {
 };
 
 export const postSendResolver = (req, res, ctx) => {
-  const { wallet_id, amount } = req.body;
+  const { walletId, amount } = req.body;
 
-  const prevBalance = sessionStorage.getItem(`wallet_${wallet_id}_balance`);
+  const prevBalance = sessionStorage.getItem(`wallet_${walletId}_balance`);
   const newBalance = (prevBalance - amount).toFixed(2);
-  sessionStorage.setItem(`wallet_${wallet_id}_balance`, newBalance.toString());
+  sessionStorage.setItem(`wallet_${walletId}_balance`, newBalance.toString());
 
   return res(
     ctx.status(200),
     ctx.json({
       message: "Transaction successful!",
-      details: { wallet_id, amount: (+amount).toFixed(2) },
+      details: { walletId, amount: (+amount).toFixed(2) },
     })
   );
 };

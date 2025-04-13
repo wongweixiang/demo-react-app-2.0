@@ -1,17 +1,13 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { fetchWallets } from "../pages/Home/reducer";
-import { AppDispatch, RootState } from "../store";
+import { useQuery } from "@tanstack/react-query";
+import { fetchWallets } from "../services/fetchWallets";
 
 export const useWallets = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const { data, refetch, ...otherQueryProps } = useQuery({
+    queryKey: ["wallets"],
+    queryFn: async () => {
+      return await fetchWallets();
+    },
+  });
 
-  useEffect(() => {
-    dispatch(fetchWallets());
-  }, [dispatch]);
-
-  const { wallets } = useSelector((state: RootState) => state.home);
-
-  return { wallets };
+  return { wallets: data ?? [], refetch, ...otherQueryProps };
 };
