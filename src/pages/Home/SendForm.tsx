@@ -3,11 +3,13 @@ import { Form, Select, Input, Button, Modal } from "antd";
 import { Wallet } from "./types";
 import { useWallets } from "../../hooks/useWallets";
 import { useSendPayment } from "../../hooks/useSendPayment";
+import { useContacts } from "../../hooks/useContacts";
 
 const Send = () => {
   const { wallets } = useWallets();
+  const { contacts } = useContacts();
 
-  const { form, contacts, handleSendPayment } = useSendPayment();
+  const { form, handleSendPayment } = useSendPayment();
 
   return (
     <>

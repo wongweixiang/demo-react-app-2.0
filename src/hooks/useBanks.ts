@@ -1,43 +1,58 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Form } from "antd";
 
-import {
-  fetchBanks,
-  addBankAccount,
-  deleteBankAccount,
-} from "../pages/UserProfile/reducer";
-import { AppDispatch, RootState } from "../store";
 import { useModalState } from "./useModalState";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchBanks } from "../services/fetchBanks";
+import { createBankAccount } from "../services/createBankAccount";
+import { UserProfile } from "../services/fetchUserProfile";
+import { deleteBankAccount } from "../services/deleteBankAccount";
 
 export const useBanks = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const [form] = Form.useForm();
 
   const { handleModalClosing } = useModalState();
 
-  useEffect(() => {
-    dispatch(fetchBanks());
-  }, [dispatch]);
+  const { data: banks } = useQuery({
+    queryKey: ["banks"],
+    queryFn: async () => {
+      return await fetchBanks();
+    },
+  });
 
-  const handleAddBankAccount = (values: {
+  const handleAddBankAccount = async (values: {
     accountNo: string;
     bankAbbrev: string;
   }) => {
-    dispatch(addBankAccount(values)).then(() => {
-      handleModalClosing();
-      form.resetFields();
+    const response = await createBankAccount(values);
+
+    queryClient.setQueryData(["userProfile"], (prev: UserProfile) => {
+      return {
+        ...prev,
+        bankAccounts: [...prev.bankAccounts, response.account],
+      };
+    });
+
+    handleModalClosing();
+    form.resetFields();
+  };
+
+  const handleDeleteBankAccount = async (id: number) => {
+    const response = await deleteBankAccount({ id });
+
+    queryClient.setQueryData(["userProfile"], (prev: UserProfile) => {
+      return {
+        ...prev,
+        bankAccounts: prev.bankAccounts.filter(
+          (account) => account.id !== response.id
+        ),
+      };
     });
   };
 
-  const handleDeleteBankAccount = (id: number) =>
-    dispatch(deleteBankAccount({ id }));
-
-  const { banks } = useSelector((state: RootState) => state.userProfile);
-
   return {
-    banks,
+    banks: banks ?? [],
     form,
     handleAddBankAccount,
     handleDeleteBankAccount,

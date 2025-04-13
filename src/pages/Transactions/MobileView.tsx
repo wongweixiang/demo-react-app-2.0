@@ -1,26 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-
-import { Pagination, Card } from "antd";
+import { Card } from "antd";
 import dayjs from "dayjs";
 
-import { AppDispatch, RootState } from "../../store";
 import StatusTag from "./StatusTag";
-import { Transaction } from "./types";
-import { updatePage } from "./reducer";
+import { Transaction } from "../../services/fetchTransactions";
 
 const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const { currentPage, pageSize } = useSelector(
-    (state: RootState) => state.transactions.pagination
-  );
-
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = currentPage * pageSize;
-  const transactionsOnCurrentPage = transactions.slice(startIndex, endIndex);
-
   return (
     <div className="flex flex-col gap-4 md:hidden">
-      {transactionsOnCurrentPage.map((t: Transaction) => {
+      {transactions.map((t: Transaction) => {
         const { id, status, amount, type, createdAt } = t;
         const { direction, currency, netAmount } = amount;
 
@@ -42,12 +29,6 @@ const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
           </Card>
         );
       })}
-      <Pagination
-        current={currentPage}
-        pageSize={pageSize}
-        total={transactions.length}
-        onChange={(page) => dispatch(updatePage(page))}
-      />
     </div>
   );
 };

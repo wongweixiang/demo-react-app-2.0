@@ -2,22 +2,22 @@ export const getUserProfileResolver = (req, res, ctx) => {
   return res(
     ctx.status(200),
     ctx.json({
-      full_name: "Test User One",
+      fullName: "WX",
       email: "test_user@gmail.com",
-      phone_no: "811911112",
-      profile_img_url: "https://picsum.photos/id/203/300",
-      bank_accounts: [
+      phoneNo: "811911112",
+      profileImgUrl: "https://picsum.photos/id/203/300",
+      bankAccounts: [
         {
           id: 99,
-          account_no: "0122368991",
-          bank_abbrev: "DBS",
-          verification_status: "verified",
+          accountNo: "0122368991",
+          bankAbbrev: "DBS",
+          verificationStatus: "verified",
         },
         {
           id: 98,
-          account_no: "0744368552",
-          bank_abbrev: "UOB",
-          verification_status: "pending",
+          accountNo: "0744368552",
+          bankAbbrev: "UOB",
+          verificationStatus: "pending",
         },
       ],
     })
@@ -39,7 +39,7 @@ export const getBanksResolver = (req, res, ctx) => {
 };
 
 export const postBankAccountResolver = (req, res, ctx) => {
-  const { account_no, bank_abbrev } = req.body;
+  const { accountNo, bankAbbrev } = req.body;
 
   return res(
     ctx.status(200),
@@ -47,9 +47,9 @@ export const postBankAccountResolver = (req, res, ctx) => {
       message: "Successfully added account",
       account: {
         id: Math.floor(Math.random() * 1000), // return random integer from 0 to 999
-        account_no,
-        bank_abbrev,
-        verification_status: "pending",
+        accountNo,
+        bankAbbrev,
+        verificationStatus: "pending",
       },
     })
   );

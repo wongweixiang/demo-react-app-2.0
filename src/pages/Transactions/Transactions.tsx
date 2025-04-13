@@ -1,15 +1,23 @@
-import { Select, Input } from "antd";
+import { Select, Input, Pagination } from "antd";
 
 import DesktopView from "./DesktopView";
 import MobileView from "./MobileView";
 
 import { useTransactions } from "../../hooks/useTransactions";
+import { usePagination } from "../../hooks/usePagination";
 
 const { Search } = Input;
 
 const Transactions = () => {
-  const { transactions, setTransactionID, setStatus, setTransactionType } =
-    useTransactions();
+  const { currentPage, pageSize, setCurrentPage } = usePagination();
+
+  const {
+    transactions,
+    pagination,
+    setTransactionID,
+    setStatus,
+    setTransactionType,
+  } = useTransactions();
 
   return (
     <>
@@ -42,6 +50,14 @@ const Transactions = () => {
         </div>
         <DesktopView transactions={transactions} />
         <MobileView transactions={transactions} />
+        <div className="w-full flex items-center justify-start md:justify-end mt-3">
+          <Pagination
+            current={currentPage}
+            pageSize={pageSize}
+            total={pagination?.total ?? 0}
+            onChange={(page) => setCurrentPage(page)}
+          />
+        </div>
       </div>
     </>
   );

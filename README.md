@@ -4,12 +4,11 @@ This application is a mock wallet service webapp (both desktop and mobile view a
 The following technologies were used to create this app:
 
 - React
-- Redux (@reduxjs/toolkit)
 - Typescript
+- React Query
 - Ant Design for UI components
-- emotion (css-in-js library)
+- TailwindCSS
 - dayjs for date formatting
-- axios
 - MSW (mock service worker)
 
 ## Features

@@ -1,26 +1,41 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
-import { fetchTransactions } from "../pages/Transactions/reducer";
-import { AppDispatch, RootState } from "../store";
+import { fetchTransactions } from "../services/fetchTransactions";
+import { useQuery } from "@tanstack/react-query";
+import { usePagination } from "./usePagination";
 
 export const useTransactions = () => {
-  const dispatch: AppDispatch = useDispatch();
-
   const [transactionID, setTransactionID] = useState("");
   const [status, setStatus] = useState([]);
   const [transactionType, setTransactionType] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchTransactions({ transactionID, status, transactionType }));
-  }, [transactionID, status, transactionType, dispatch]);
+  const { currentPage, pageSize } = usePagination();
 
-  const { transactions } = useSelector(
-    (state: RootState) => state.transactions
-  );
+  const { data: transactions } = useQuery({
+    queryKey: [
+      "transactions",
+      currentPage,
+      pageSize,
+      transactionID,
+      status,
+      transactionType,
+    ],
+    queryFn: async () => {
+      const response = await fetchTransactions({
+        transactionID,
+        status,
+        transactionType,
+        page: currentPage,
+        limit: pageSize,
+      });
+
+      return response;
+    },
+  });
 
   return {
-    transactions,
+    transactions: transactions?.data ?? [],
+    pagination: transactions?.pagination,
     setTransactionID,
     setStatus,
     setTransactionType,
