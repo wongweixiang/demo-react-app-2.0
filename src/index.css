@@ -58,6 +58,12 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+@keyframes loading-skeleton-bg {
+  to {
+    transform: translate(100%)
+  }
+}
+
 .navbar-desktop {
   transition: left 0.5s ease-out;
 
@@ -74,10 +80,6 @@ input[type="number"] {
 
 .ant-switch-inner {
   @apply bg-gray-600;
-}
-
-.test {
-  @apply text-red-600;
 }
 
 .card-head {
