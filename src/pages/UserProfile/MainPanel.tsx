@@ -23,12 +23,12 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
         placement="bottomLeft"
       >
         <Button
-          className="flex items-center bg-gray-100 dark:bg-gray-900 mt-2"
+          className="flex items-center bg-gray-100 mt-2"
           disabled={bankAccounts.length >= MAX_NUMBER}
           onClick={handleModalOpening}
         >
           <PlusCircleOutlined />
-          <span className="theme">Add Account</span>
+          <span>Add Account</span>
         </Button>
       </Tooltip>
       <div className="flex flex-col md:grid md:grid-cols-2 2xl:grid-cols-3 mt-4 h-auto w-full gap-4">
@@ -47,7 +47,6 @@ const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
         closable={false}
       >
         <Form
-          className="theme"
           form={form}
           layout="vertical"
           onFinish={(values) => handleAddBankAccount(values)}
@@ -135,6 +134,7 @@ const AccountCard = ({
 
 const StatusTag = ({ status }: { status: string }) => {
   const colourMapping: Record<string, string> = {
+    pending: "grey",
     verified: "green",
     rejected: "red",
   };

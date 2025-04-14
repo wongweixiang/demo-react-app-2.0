@@ -43,7 +43,7 @@ const Navigation = ({ isDisplayed }: { isDisplayed: boolean }) => {
   return (
     <div
       className={clsx(
-        `block fixed h-full min-w-64 bg-gray-900 navbar-desktop z-20`,
+        `block fixed h-full min-w-64 bg-[#001529] navbar-desktop z-20`,
         isDisplayed ? "left-0" : "-left-64"
       )}
     >

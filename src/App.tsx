@@ -35,7 +35,7 @@ function App() {
     >
       <ThemeSync />
       <div className="flex">
-        <div className="bg-gray-900" ref={ref}>
+        <div className="bg-[#001529]" ref={ref}>
           <Navigation isDisplayed={isNavOpen} />
         </div>
         <div className="flex flex-col w-full min-h-screen box-border text-[calc(10px + 2vmin)]">
