@@ -109,9 +109,9 @@ input[type="number"] {
 }
 
 .no-border {
-  @apply border-none border border-gray-300 rounded box-border;
+  @apply border-none;
 }
 
 .grey-border {
-  @apply border-solid border border-gray-300 rounded box-border;
+  @apply border-solid border border-gray-300 dark:border-gray-500 rounded-xl box-border;
 }
