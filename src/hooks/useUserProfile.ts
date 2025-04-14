@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchUserProfile } from "../services/fetchUserProfile";
 
 export const useUserProfile = () => {
-  const { data } = useQuery({
+  const { data, ...otherQueryProps } = useQuery({
     queryKey: ["userProfile"],
     queryFn: async () => {
       return await fetchUserProfile();
@@ -16,5 +16,5 @@ export const useUserProfile = () => {
     },
   });
 
-  return { ...data };
+  return { ...data, ...otherQueryProps };
 };

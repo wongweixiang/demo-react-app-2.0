@@ -1,6 +1,7 @@
 export const getUserProfileResolver = (req, res, ctx) => {
   return res(
     ctx.status(200),
+    ctx.delay(),
     ctx.json({
       fullName: "WX",
       email: "test_user@gmail.com",

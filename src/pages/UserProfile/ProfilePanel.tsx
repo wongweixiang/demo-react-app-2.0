@@ -1,13 +1,20 @@
-const ProfilePanel = ({
-  fullName,
-  email,
-  phoneNo,
-  profileImgUrl = "",
-}: {
+import { Skeleton } from "antd";
+import { FC } from "react";
+
+type ProfilePanelProps = {
+  isLoading: boolean;
   fullName: string;
   email: string;
   phoneNo: string;
   profileImgUrl: string;
+};
+
+const ProfilePanel: FC<ProfilePanelProps> = ({
+  isLoading,
+  fullName,
+  email,
+  phoneNo,
+  profileImgUrl = "",
 }) => {
   return (
     <div className="flex flex-col min-w-[300px] p-5 grey-border">
@@ -21,19 +28,35 @@ const ProfilePanel = ({
         <div className="w-48 h-48 mx-auto mt-8 mb-12 rounded-full bg-slate-300"></div>
       )}
 
-      <ProfileField label="Name" field={fullName} />
-      <ProfileField label="Email" field={email} />
-      <ProfileField label="Phone Number" field={phoneNo} />
+      <ProfileField label="Name" field={fullName} isLoading={isLoading} />
+      <ProfileField label="Email" field={email} isLoading={isLoading} />
+      <ProfileField
+        label="Phone Number"
+        field={phoneNo}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
 
-const ProfileField = ({ label, field }: { label: string; field: string }) => {
+const ProfileField = ({
+  label,
+  field,
+  isLoading,
+}: {
+  label: string;
+  field: string;
+  isLoading: boolean;
+}) => {
   return (
-    <>
+    <div className="flex flex-col mb-5">
       <span className="font-semibold">{label}</span>
-      <span className="mb-5">{field}</span>
-    </>
+      {isLoading ? (
+        <Skeleton.Input active size="small" />
+      ) : (
+        <span>{field}</span>
+      )}
+    </div>
   );
 };
 
