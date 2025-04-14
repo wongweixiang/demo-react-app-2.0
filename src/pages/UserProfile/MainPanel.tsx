@@ -5,10 +5,13 @@ import { BankAccount } from "./types";
 import SvgMapper from "../../helpers/svgMapper";
 import { useBanks } from "../../hooks/useBanks";
 import { useModalState } from "../../hooks/useModalState";
+import { FC } from "react";
 
 const MAX_NUMBER = 5;
 
-const MainPanel = ({ bankAccounts }: { bankAccounts: BankAccount[] }) => {
+type MainPanelProps = { bankAccounts: BankAccount[] };
+
+const MainPanel: FC<MainPanelProps> = ({ bankAccounts }) => {
   const { banks, form, handleAddBankAccount, handleDeleteBankAccount } =
     useBanks();
 

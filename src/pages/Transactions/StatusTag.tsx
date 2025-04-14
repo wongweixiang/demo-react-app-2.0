@@ -1,6 +1,9 @@
 import { Tag } from "antd";
+import { FC } from "react";
 
-const StatusTag = ({ status }: { status: string }) => {
+type StatusTagProps = { status: string };
+
+const StatusTag: FC<StatusTagProps> = ({ status }) => {
   const colourMapping: Record<string, string> = {
     completed: "green",
     cancelled: "red",
