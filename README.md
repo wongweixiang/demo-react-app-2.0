@@ -1,6 +1,7 @@
 # QuickPay, a demo React application
 
 This application is a mock wallet service webapp (both desktop and mobile view available)
+
 The following technologies were used to create this app:
 
 - React
@@ -10,6 +11,8 @@ The following technologies were used to create this app:
 - TailwindCSS
 - dayjs for date formatting
 - MSW (mock service worker)
+
+To start, clone the repository and run `npm install` followed by `npm start`
 
 ## Features
 
