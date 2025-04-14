@@ -82,7 +82,7 @@ input[type="number"] {
 
 .card-head {
   .ant-card-head {
-    @apply bg-slate-900 dark:bg-slate-100  text-gray-100 dark:text-gray-900;
+    @apply bg-slate-900 dark:bg-blue-100 rounded-t  text-gray-100 dark:text-gray-900;
   }
 }
 
