@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 
 import { Transaction } from "../../services/fetchTransactions";
 import StatusTag from "./StatusTag";
+import { FC } from "react";
 
 const columns = [
   {
@@ -36,7 +37,12 @@ const columns = [
   },
 ];
 
-const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
+type DesktopViewProps = {
+  transactions: Transaction[];
+  isLoading: boolean;
+};
+
+const DesktopView: FC<DesktopViewProps> = ({ transactions, isLoading }) => {
   return (
     <div className="hidden md:block">
       <Table
@@ -44,6 +50,7 @@ const DesktopView = ({ transactions }: { transactions: Transaction[] }) => {
         columns={columns}
         dataSource={transactions}
         pagination={false}
+        loading={isLoading}
       />
     </div>
   );

@@ -1,13 +1,25 @@
 import { Card } from "antd";
 import dayjs from "dayjs";
 
+import { Spin } from "antd";
+
 import StatusTag from "./StatusTag";
 import { Transaction } from "../../services/fetchTransactions";
+import { FC } from "react";
 
-const MobileView = ({ transactions }: { transactions: Transaction[] }) => {
+type MobileViewProps = {
+  transactions: Transaction[];
+  isLoading: boolean;
+};
+const MobileView: FC<MobileViewProps> = ({ transactions, isLoading }) => {
   return (
     <div className="flex flex-col gap-4 md:hidden">
-      {transactions.map((t: Transaction) => {
+      {isLoading && (
+        <div className="w-full h-64 flex items-center justify-center">
+          <Spin />
+        </div>
+      )}
+      {transactions?.map((t: Transaction) => {
         const { id, status, amount, type, createdAt } = t;
         const { direction, currency, netAmount } = amount;
 

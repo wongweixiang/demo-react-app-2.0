@@ -11,7 +11,7 @@ export const useTransactions = () => {
 
   const { currentPage, pageSize } = usePagination();
 
-  const { data: transactions } = useQuery({
+  const { data: transactions, ...otherQueryProps } = useQuery({
     queryKey: [
       "transactions",
       currentPage,
@@ -39,5 +39,6 @@ export const useTransactions = () => {
     setTransactionID,
     setStatus,
     setTransactionType,
+    ...otherQueryProps,
   };
 };

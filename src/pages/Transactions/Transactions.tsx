@@ -13,6 +13,7 @@ const Transactions = () => {
 
   const {
     transactions,
+    isLoading,
     pagination,
     setTransactionID,
     setStatus,
@@ -48,8 +49,8 @@ const Transactions = () => {
             })}
           />
         </div>
-        <DesktopView transactions={transactions} />
-        <MobileView transactions={transactions} />
+        <DesktopView transactions={transactions} isLoading={isLoading} />
+        <MobileView transactions={transactions} isLoading={isLoading} />
         <div className="w-full dark:bg-slate-300 flex items-center justify-start md:justify-end mt-3 p-3 rounded-lg">
           <Pagination
             current={currentPage}

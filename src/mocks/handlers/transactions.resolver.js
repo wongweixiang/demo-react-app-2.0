@@ -37,6 +37,7 @@ export const getTransactionsResolver = (req, res, ctx) => {
 
   return res(
     ctx.status(200),
+    ctx.delay(),
     ctx.json({
       data: transactionsOnCurrentPage,
       pagination: {
